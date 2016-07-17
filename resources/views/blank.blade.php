@@ -41,7 +41,7 @@
 
                     <li class="xn-title">Consultar Propostas</li>
                     <li>
-                        <a href="/"><span class="fa fa-file-text-o"></span> <span class="xn-text">Proposta de Serviço</span></a>
+                        <a href="/propostas-servico"><span class="fa fa-file-text-o"></span> <span class="xn-text">Proposta de Serviço</span></a>
                     </li> 
 
                     <li>
