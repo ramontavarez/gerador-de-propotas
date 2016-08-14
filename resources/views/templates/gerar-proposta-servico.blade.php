@@ -1,5 +1,9 @@
 @extends('blank')
     @section('content')
+                <ul class="breadcrumb">
+                    <!-- <li><a href="/">Propostas</a></li>                     -->
+                    <li class="active">Gerar proposta de serviço</li>
+                </ul>
                <div class="page-title">                    
                     <h2><span class="fa fa-file"></span> Proposta de Serviço</h2>
                 </div>                   
@@ -140,13 +144,16 @@
                
                 </div>
                 <!-- END PAGE CONTENT WRAPPER -->  
-<!--         <script type="text/javascript" src="js/plugins.js"></script>         
-        <script type="text/javascript" src="js/actions.js"></script>  -->
+        <!-- <script type="text/javascript" src="public/js/plugins.js"></script>          -->
+        <!-- <script type="text/javascript" src="public/js/actions.js"></script>  -->
+
         @section('scripts')
         <script>
             $("#add-service").click(function(){
                 $(".service-line").first().clone().appendTo('.service-table');
             });
+
+
         </script>
         @endsection
 

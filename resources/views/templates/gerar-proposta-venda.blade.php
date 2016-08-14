@@ -1,5 +1,9 @@
 @extends('blank')
     @section('content')
+                    <ul class="breadcrumb">
+                    <!-- <li><a href="/">Propostas</a></li>                     -->
+                    <li class="active">Gerar proposta de serviço</li>
+                </ul>
                <div class="page-title">                    
                     <h2><span class="fa fa-file"></span> Proposta de Venda</h2>
                 </div>                   

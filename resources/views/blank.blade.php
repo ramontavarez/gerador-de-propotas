@@ -12,6 +12,7 @@
         
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="public/css/animate/animate.min.css"/>
       
         <!-- EOF CSS INCLUDE -->  
 
@@ -45,7 +46,19 @@
                     </li> 
 
                     <li>
-                        <a href="/"><span class="fa fa-file-text-o"></span> <span class="xn-text">Proposta de Venda</span></a>
+                        <a href="/propostas-venda"><span class="fa fa-file-text-o"></span> <span class="xn-text">Proposta de Venda</span></a>
+                    </li>
+
+                    <li class="xn-title">Templates</li>
+
+                    <li>
+                        <a href="/templates-proposta"><span class="fa fa-file"></span> 
+                        <span class="xn-text">Proposta</span></a>
+                    </li>
+
+                    <li>
+                        <a href="/templates-tabela"><span class="fa fa-table"></span> 
+                        <span class="xn-text">Tabela</span></a>
                     </li>
 
                     <li class="xn-title">Calendário</li>
@@ -80,12 +93,7 @@
                 </ul>
                 <!-- END X-NAVIGATION VERTICAL -->                     
                 
-                <!-- START BREADCRUMB -->
-                <ul class="breadcrumb">
-                    <li><a href="/">Propostas</a></li>                    
-                    <li class="active">Proposta de Serviço</li>
-                </ul>
-                <!-- END BREADCRUMB -->
+
                 
                 <div class="">
                         @yield('content')
