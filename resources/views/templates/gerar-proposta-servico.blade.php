@@ -1,26 +1,26 @@
 @extends('base')
     @section('content')
                 <ul class="breadcrumb">
-                    <!-- <li><a href="/">Propostas</a></li>                     -->
+                    <li><a href="/">Home</a></li>
                     <li class="active">Gerar proposta de serviço</li>
                 </ul>
-               <div class="page-title">                    
-                    <h2><span class="fa fa-file"></span> Proposta de Serviço</h2>
-                </div>                   
-                
+               <div class="page-title">
+                    <h2><span class="fa fa-file"></span> Gerar proposta de serviço</h2>
+                </div>
+
                 <!-- PAGE CONTENT WRAPPER -->
                 <div class="page-content-wrap">
-                
+
                     <div class="row">
                         <div class="col-md-12">
 
                     <!-- START HORIZONTAL FORM SAMPLE -->
                             <div class="panel panel-default">
                              <div class="panel-heading" style="background:#fff">
-                                <h3 class="panel-title"><strong>Cabeçalho</strong></h3>  
+                                <h3 class="panel-title"><strong>Cabeçalho</strong></h3>
                              </div>
                                 <div class="panel-body">
-                                                                  
+
                                     <form class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Contratado</label>
@@ -48,17 +48,17 @@
                                                 <input type="date" name="data" class="form-control" >
                                             </div>
                                         </div>
-                                  
-                                    </form>                                                                                         
+
+                                    </form>
                                 </div>
                             </div>
 
                              <div class="panel panel-default">
                              <div class="panel-heading" style="background:#fff">
-                                <h3 class="panel-title"><strong>Proposta</strong></h3>  
+                                <h3 class="panel-title"><strong>Proposta</strong></h3>
                              </div>
                                 <div class="panel-body">
-                                                                 
+
                                     <form class="form-horizontal" role="form">
 
                                         <div class="form-group">
@@ -102,9 +102,9 @@
                                                 <textarea class="summernote "></textarea>
                                             </div>
                                         </div>
-                                        
-                                  
-                                    </form>                                                                                         
+
+
+                                    </form>
                                 </div>
                             </div>
 
@@ -113,7 +113,7 @@
                                 <div class="panel-heading" style="background:#fff">
                                     <h3 class="panel-title"><strong>Serviços</strong></h3>
                                     <ul class="panel-controls">
-                                        
+
 
                                         <li><a id="add-service" style="cursor:pointer;" data-toggle="tooltip" data-placement="left" title="Adicionar campo"><span class="fa fa-plus"></span></a></li>
                                     </ul>
@@ -134,25 +134,25 @@
 
                                             <tr class="linha-final">
                                             <td align="center" > <!-- <button class="btn btn-default calcular-total">Calcular</button> -->
-                                            <strong>Total:</strong> 
-                                            </td> 
+                                            <strong>Total:</strong>
+                                            </td>
                                             <td align="center" >
                                                 <input type="" name="" class="form-control total-result">
                                             </td>
                                             </tr>
 
-                                        </table>   
-                                </div>      
+                                        </table>
+                                </div>
                                 <div class="panel-footer">
                                     <a href="/proposta" class="btn btn-primary pull-right">Finalizar</a>
-                                </div>                            
+                                </div>
                             </div>
 
                         </div>
                     </div>
-               
+
                 </div>
-                <!-- END PAGE CONTENT WRAPPER -->  
+                <!-- END PAGE CONTENT WRAPPER -->
         <!-- <script type="text/javascript" src="public/js/plugins.js"></script>          -->
         <!-- <script type="text/javascript" src="public/js/actions.js"></script>  -->
 
@@ -160,23 +160,23 @@
         <script src="js/jquery.maskMoney.js"></script>
         <script>
         function makeMoney(){
-                
-                $(".money-value").maskMoney({symbol:'R$ ', 
+
+                $(".money-value").maskMoney({symbol:'R$ ',
                 showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
-                $(".total-result").maskMoney({symbol:'R$ ', 
+                $(".total-result").maskMoney({symbol:'R$ ',
                 showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
             }
 
             function makeResultMoney(){
-                $(".total-result").maskMoney({symbol:'R$ ', 
+                $(".total-result").maskMoney({symbol:'R$ ',
                 showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
             }
 
             makeMoney();
-   
+
             $("#add-service").click(function(){
                 $(".service-line").first().clone().insertBefore('.linha-final');
-                $(".service-line").last().find('input').val(''); 
+                $(".service-line").last().find('input').val('');
                 makeMoney();
             });
 
@@ -206,11 +206,11 @@
 
                     somaCentavos == 0 ? somaCentavos = '00' : somaCentavos;
                     total = total + ','+ somaCentavos;
-                   
+
                 });
 
                 // console.log(total);
-                
+
                 $('.total-result').val(total);
 
 
