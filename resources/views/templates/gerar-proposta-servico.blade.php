@@ -179,13 +179,13 @@
                 $(".service-line").last().find('input').val(''); 
                 makeMoney();
             });
-
+            var addReal = 0;
             $('.service-table').on('keyup', 'input.money-value', function(){
                 var valores = $('.money-value');
                 var total = 0;
                 var somaCentavos = 0;
                 var somaReais = 0;
-                $(valores).each(function(index, el) {
+                $(valores).each(function(index, el) {                    
                     var numero = $(el).val();
                     var numero = numero.slice(3, numero.length);
                     numero == '' ? numero = '0' : numero;
@@ -195,17 +195,27 @@
                     somaCentavos = parseFloat(somaCentavos) + parseFloat(centavos);
                     total = parseFloat(total) + parseFloat(numero);
 
-                    if (somaCentavos > 99) {
-                        somaReais = somaCentavos / 100;
-                        var decimalCent = String(somaReais);
-                        decimalCent = decimalCent.split(".");
-                        decimalCent > 5 ? somaReais++ : false;
-                        somaReais = parseInt(somaReais);
-                        console.log(somaReais);
+                    // somaCentavos == 0 ? somaCentavos = '00' : somaCentavos;
+                    total = total + ',00';
+                    // $('.total-result').val(total);
+                    if(parseFloat(total) != parseFloat(numero)) {
+                        var totalAtual = total;
+                        totalAtual = totalAtual.split(',');   
                     }
+                    
+                    // if (somaCentavos > 99) {
+                    //     somaReais = somaCentavos / 100;
+                    //     var decimalCent = String(somaReais);
+                    //     decimalCent = decimalCent.split(".");
+                    //     decimalCent[1] > 5 ? somaReais++ : false;
+                    //     somaReais = parseInt(somaReais);
+                    //     somaCentavos = somaCentavos % 100;
+                    //     addReal = 1;
+                    // }
 
-                    somaCentavos == 0 ? somaCentavos = '00' : somaCentavos;
-                    total = total + ','+ somaCentavos;
+                    // somaCentavos == 0 ? somaCentavos = '00' : somaCentavos;
+                    // total = total + somaReais + ','+ somaCentavos;
+
                    
                 });
 
