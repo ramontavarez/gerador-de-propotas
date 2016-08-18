@@ -1,5 +1,18 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+$brand: #2f3c48;
+$cream: #faf8f0;
+$brownie: #8a6d3b;
 
 .page-container .page-content {
 	min-height: 100vh;
+}
+
+table {
+	tr:hover {
+		background: rgba($cream, 1) !important;
+		td {
+			background: transparent !important;
+			color:$brownie;
+		}
+	}
 }

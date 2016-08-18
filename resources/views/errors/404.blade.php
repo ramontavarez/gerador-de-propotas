@@ -1,4 +1,4 @@
-@extends('blank')
+@extends('base')
 @section('content')
 	<div class="error-container">
             <div class="error-code">404</div>

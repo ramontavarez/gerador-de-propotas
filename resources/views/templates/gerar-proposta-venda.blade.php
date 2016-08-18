@@ -1,4 +1,4 @@
-@extends('blank')
+@extends('base')
     @section('content')
                     <ul class="breadcrumb">
                     <!-- <li><a href="/">Propostas</a></li>                     -->

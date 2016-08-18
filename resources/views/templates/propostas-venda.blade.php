@@ -1,8 +1,8 @@
-@extends('blank')
+@extends('base')
 	@section('content')
                 <ul class="breadcrumb">
-                    <!-- <li><a href="/">Propostas</a></li>                     -->
-                    <li class="active">Ver propostas de serviço</li>
+                    <li><a href="/">Home</a></li>
+                    <li class="active">Propostas de Venda</li>
                 </ul>
         <!-- START RESPONSIVE TABLES -->
                     <div class="row">
@@ -10,13 +10,13 @@
                             <div class="panel panel-default">
 
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Responsive tables</h3>
+                                    <h3 class="panel-title">Propostas de Venda</h3>
                                 </div>
 
                                 <div class="panel-body panel-body-table">
 
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped table-actions">
+                                        <table class="table table-striped table-actions">
                                             <thead>
                                                 <tr>
                                                     <th width="50">id</th>
@@ -27,7 +27,7 @@
                                                     <th width="160">ações</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>                                            
+                                            <tbody>
                                                 <tr id="trow_1">
                                                     <td class="text-center">1</td>
                                                     <td><strong>John Doe</strong></td>
@@ -38,7 +38,7 @@
                                                         <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-pencil"></span></button>
                                                         <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-print"></span></button>
                                                         <button class="btn btn-danger btn-rounded btn-condensed btn-sm" onClick="delete_row('trow_1');"><span class="fa fa-trash"></span></button>
-                                                        
+
                                                     </td>
                                                 </tr>
                                                 <tr id="trow_2">
@@ -67,10 +67,10 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                    </div>                                
+                                    </div>
 
                                 </div>
-                            </div>                                                
+                            </div>
 
                         </div>
                     </div>

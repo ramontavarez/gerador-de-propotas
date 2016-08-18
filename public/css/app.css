@@ -1,4 +1,10 @@
 .page-container .page-content {
   min-height: 100vh; }
 
+table tr:hover {
+  background: #faf8f0 !important; }
+  table tr:hover td {
+    background: transparent !important;
+    color: #8a6d3b; }
+
 /*# sourceMappingURL=app.css.map */
