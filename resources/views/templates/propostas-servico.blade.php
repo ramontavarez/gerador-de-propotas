@@ -2,7 +2,7 @@
 	@section('content')
                 <ul class="breadcrumb">
                     <li><a href="/">Home</a></li>
-                    <li class="active">Propostas</li>
+                    <li class="active">Propostas de Serviço</li>
                 </ul>
         <!-- START RESPONSIVE TABLES -->
                     <div class="row">
