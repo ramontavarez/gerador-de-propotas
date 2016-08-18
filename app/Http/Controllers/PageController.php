@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function showPage($name = '') {
     	if ($name == '') {
-    		return view('base');
+    		return view('templates.index');
     	} else {
     		$view = 'templates.'.$name;
     		return view($view);

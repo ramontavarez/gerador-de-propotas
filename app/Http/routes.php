@@ -16,7 +16,7 @@ Route::get('/{name?}', [
 ]);
 
 // Route::get('/', function () {
-//     return view('blank');
+//     return view('home');
 // });
 
 // Route::get('/gerar-proposta-servico', function () {
