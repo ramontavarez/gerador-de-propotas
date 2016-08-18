@@ -3,7 +3,7 @@
                     <ul class="breadcrumb">
                     <!-- <li><a href="/">Propostas</a></li>                     -->
                     <li class="active">Gerar proposta de serviço</li>
-                </ul>
+                    </ul>
                <div class="page-title">                    
                     <h2><span class="fa fa-file"></span> Proposta de Venda</h2>
                 </div>                   
@@ -129,13 +129,23 @@
 
                                             <tr class="service-line">
                                             <td><input type="" name="" class="form-control"></td>
-                                            <td><input type="" name="" class="form-control"></td>
+                                            <td><input type="" name="" class="form-control money-value"></td>
                                             </tr>
 
+                                            <tr class="linha-final">
+                                            <td align="center" > <!-- <button class="btn btn-default calcular-total">Calcular</button> -->
+                                            <strong>Total:</strong> 
+                                            </td> 
+                                            <td align="center" >
+                                                <input type="" name="" class="form-control total-result">
+                                            </td>
+                                            </tr>
                                         </table>   
+
+
                                 </div>      
                                 <div class="panel-footer">
-                                    <button class="btn btn-primary pull-right">Finalizar</button>
+                                    <a href="/proposta" class="btn btn-primary pull-right">Finalizar</a>
                                 </div>                            
                             </div>
 
@@ -145,10 +155,48 @@
                 </div>
                 <!-- END PAGE CONTENT WRAPPER -->  
         @section('scripts')
+        <script src="js/jquery.maskMoney.js"></script>
         <script>
+            function makeMoney(){
+                
+                $(".money-value").maskMoney({symbol:'R$ ', 
+                showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
+                $(".total-result").maskMoney({symbol:'R$ ', 
+                showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
+            }
+
+            function makeResultMoney(){
+                $(".total-result").maskMoney({symbol:'R$ ', 
+                showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
+            }
+
+            makeMoney();
+   
             $("#add-service").click(function(){
-                $(".service-line").first().clone().appendTo('.service-table');
+                $(".service-line").first().clone().insertBefore('.linha-final');
+                $(".service-line").last().find('input').val(''); 
+                makeMoney();
             });
+
+            $('.service-table').on('keyup', 'input.money-value', function(){
+                var valores = $('.money-value');
+                var total = 0;
+                $(valores).each(function(index, el) {
+                    var numero = $(el).val();
+                    var numero = numero.slice(3, numero.length);
+                    numero = numero.replace(',', '.');
+                    total = parseFloat(total) + parseFloat(numero);
+                    total = total + ',00';
+                   
+                });
+
+                console.log(total);
+                
+                $('.total-result').val(total);
+
+
+            });
+
         </script>
         @endsection
 @endsection

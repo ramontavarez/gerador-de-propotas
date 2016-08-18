@@ -113,7 +113,7 @@
             <div class="content-frame-body">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h3>Configurações Gerais</h3>
+                        <h3>Título do template</h3>
                         <form class="form-horizontal" role="form">
 
                             <div class="form-group">

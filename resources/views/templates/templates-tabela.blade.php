@@ -48,6 +48,7 @@
                                     <option value="">Escolha um tipo</option>
                                     <option value="1">Texto</option>
                                     <option value="2">Select</option>
+                                    <option value="3">Valor($)</option>
                                 </select>
                                 <span class="form-bar"></span>
                                 <label for="exampleInputSelect1">Tipo</label>
@@ -111,7 +112,7 @@
             <div class="content-frame-body">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h3>Informações Gerais</h3>
+                        <h3>Título do template</h3>
                         <form class="form-horizontal" role="form">
 
                             <div class="form-group">
@@ -121,6 +122,13 @@
                                         <input type="checkbox" checked="" value="0">
                                         <span></span>
                                     </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Título:</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="" class="form-control">
                                 </div>
                             </div>
 
@@ -158,7 +166,7 @@
                             <a href="#" class="list-group-item">                                    
                                 
                                 <span class="contacts-title">Valor</span>
-                                <p><strong>Tipo:</strong> Texto</p> 
+                                <p><strong>Tipo:</strong> Valor($)</p> 
                                 <div class="list-group-controls">
                                     <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
                                     <button class="btn btn-danger btn-rounded"><span class="fa fa-trash"></span></button>

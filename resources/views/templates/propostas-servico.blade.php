@@ -36,7 +36,7 @@
                                                     <td>24/09/2015</td>
                                                     <td>
                                                         <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-pencil"></span></button>
-                                                        <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-print"></span></button>
+                                                        <a href="/proposta" class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-print"></span></a>
                                                         <button class="btn btn-danger btn-rounded btn-condensed btn-sm" onClick="delete_row('trow_1');"><span class="fa fa-trash"></span></button>
                                                         
                                                     </td>
@@ -49,7 +49,7 @@
                                                     <td>23/09/2015</td>
                                                     <td>
                                                         <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-pencil"></span></button>
-                                                        <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-print"></span></button>
+                                                        <a href="/proposta" class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-print"></span></a>
                                                         <button class="btn btn-danger btn-rounded btn-condensed btn-sm" onClick="delete_row('trow_1');"><span class="fa fa-trash"></span></button>
                                                     </td>
                                                 </tr>
@@ -61,7 +61,7 @@
                                                     <td>22/09/2015</td>
                                                     <td>
                                                         <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-pencil"></span></button>
-                                                        <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-print"></span></button>
+                                                        <a href="/proposta" class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-print"></span></a>
                                                         <button class="btn btn-danger btn-rounded btn-condensed btn-sm" onClick="delete_row('trow_1');"><span class="fa fa-trash"></span></button>
                                                     </td>
                                                 </tr>
