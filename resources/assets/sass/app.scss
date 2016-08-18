@@ -8,11 +8,15 @@ $brownie: #8a6d3b;
 }
 
 table {
-	tr:hover {
-		background: rgba($cream, 1) !important;
-		td {
-			background: transparent !important;
-			color:$brownie;
+	tbody tr{
+		border-left-width: 3px;
+		&:hover {
+			background: rgba($cream, 1) !important;
+			border-left: 3px solid $brownie;
+			td {
+				background: transparent !important;
+				color:$brownie;
+			}
 		}
 	}
 }
