@@ -1,4 +1,4 @@
-@extends('blank')
+@extends('base')
     @section('content')
 <!-- START CONTENT FRAME -->
                 <div class="content-frame">            
