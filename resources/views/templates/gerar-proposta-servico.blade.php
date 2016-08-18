@@ -159,7 +159,7 @@
         @section('scripts')
         <script src="js/jquery.maskMoney.js"></script>
         <script>
-      function makeMoney(){
+        function makeMoney(){
                 
                 $(".money-value").maskMoney({symbol:'R$ ', 
                 showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
@@ -183,16 +183,33 @@
             $('.service-table').on('keyup', 'input.money-value', function(){
                 var valores = $('.money-value');
                 var total = 0;
+                var somaCentavos = 0;
+                var somaReais = 0;
                 $(valores).each(function(index, el) {
                     var numero = $(el).val();
                     var numero = numero.slice(3, numero.length);
-                    numero = numero.replace(',', '.');
+                    numero == '' ? numero = '0' : numero;
+                    var centavos = numero.replace(',', '.');
+                    var centavosPos = centavos.length - 2;
+                    centavos = centavos.slice(centavosPos, centavos.length);
+                    somaCentavos = parseFloat(somaCentavos) + parseFloat(centavos);
                     total = parseFloat(total) + parseFloat(numero);
-                    total = total + ',00';
+
+                    if (somaCentavos > 99) {
+                        somaReais = somaCentavos / 100;
+                        var decimalCent = String(somaReais);
+                        decimalCent = decimalCent.split(".");
+                        decimalCent > 5 ? somaReais++ : false;
+                        somaReais = parseInt(somaReais);
+                        console.log(somaReais);
+                    }
+
+                    somaCentavos == 0 ? somaCentavos = '00' : somaCentavos;
+                    total = total + ','+ somaCentavos;
                    
                 });
 
-                console.log(total);
+                // console.log(total);
                 
                 $('.total-result').val(total);
 
