@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.scss"],"names":[],"mappings":"AAEA;EACC,kBAAkB,EAClB","file":"app.css","sourcesContent":["// @import \"node_modules/bootstrap-sass/assets/stylesheets/bootstrap\";\n\n.page-container .page-content {\n\tmin-height: 100vh;\n}\n"],"sourceRoot":"/source/"}
