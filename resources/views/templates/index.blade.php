@@ -27,10 +27,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
 </div>
 <!-- END CONTENT FRAME -->
 @section('scripts')
