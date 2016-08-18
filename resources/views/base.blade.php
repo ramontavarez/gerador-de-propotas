@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <!-- META SECTION -->
-        <title>Propomaker</title>
+        <title>Gerador de Propostas</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,7 +28,7 @@
                 <!-- START X-NAVIGATION -->
                 <ul class="x-navigation">
                     <li class="xn-logo">
-                        <a href="/">ATLANT</a>
+                        <a href="/">Gerador de Propostas</a>
                         <a href="/" class="x-navigation-control"></a>
                     </li>
                     <li class="xn-title">Gerar Propostas</li>
@@ -89,6 +89,56 @@
                     <li class="xn-icon-button">
                         <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
                     </li>
+
+                    <!-- POWER OFF -->
+                    <li class="xn-icon-button pull-right last">
+                        <a href="#"><span class="fa fa-power-off"></span></a>
+                        <ul class="xn-drop-left animated zoomIn">
+                            <li><a href="pages-lock-screen.html"><span class="fa fa-lock"></span> Lock Screen</a></li>
+                            <li><a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span> Sign Out</a></li>
+                        </ul>                        
+                    </li> 
+                    <!-- END POWER OFF --> 
+
+                    <!-- TASKS -->
+                    <li class="xn-icon-button pull-right">
+                        <a href="#"><span class="fa fa-bell"></span></a>
+                        <div class="informer informer-warning">3</div>
+                        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="fa fa-bell"></span> Serviços Próximos</h3>                                
+                                <div class="pull-right">
+                                    <span class="label label-warning">3 ativos</span>
+                                </div>
+                            </div>
+                            <div class="panel-body list-group scroll" style="height: 200px;">                                
+                                <a class="list-group-item" href="#">
+                                    <small class="text-muted">18/08/2016</small><br>
+                                    <strong>Manutenção</strong><br>
+                                    <small>Av Rio Branco 350 - 502 - Rio de Janeiro</small>
+                                </a>
+                                <a class="list-group-item" href="#">
+                                    <small class="text-muted">18/08/2016</small><br>
+                                    <strong>Manutenção</strong><br>
+                                    <small>Av Rio Branco 350 - 502 - Rio de Janeiro</small>
+                                </a>
+                                <a class="list-group-item" href="#">
+                                    <small class="text-muted">18/08/2016</small><br>
+                                    <strong>Manutenção</strong><br>
+                                    <small>Av Rio Branco 350 - 502 - Rio de Janeiro</small>
+                                </a>
+                               <a class="list-group-item" href="#">
+                                    <small class="text-muted">18/08/2016</small><br>
+                                    <strong>Manutenção</strong><br>
+                                    <small>Av Rio Branco 350 - 502 - Rio de Janeiro</small>
+                                </a>                               
+                            </div>     
+                            <div class="panel-footer text-center">
+                                <a href="pages-tasks.html">Show all tasks</a>
+                            </div>                            
+                        </div>                        
+                    </li>
+                    <!-- END TASKS -->
                     <!-- END TOGGLE NAVIGATION -->
                 </ul>
                 <!-- END X-NAVIGATION VERTICAL -->
@@ -134,6 +184,8 @@
         <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
+        <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
+        <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
         <!-- END PLUGINS -->
         <script type="text/javascript" src="js/plugins/summernote/summernote.js"></script>
         <!-- ANGULAR -->

@@ -27,12 +27,11 @@
                         
                         <h4>External Events</h4>
                         <div class="list-group border-bottom" id="external-events">                                    
-                            <a class="list-group-item external-event">Lorem ipsum dolor</a>
-                            <a class="list-group-item external-event">Nam a nisi et nisi</a>
-                            <a class="list-group-item external-event">Donec tristique eu</a>
-                            <a class="list-group-item external-event">Vestibulum cursus</a>
-                            <a class="list-group-item external-event">Etiam euismod</a>                                    
-                            <a class="list-group-item external-event">Sed pharetra dolor</a>
+                            <a class="list-group-item external-event">Instalação</a>
+                            <a class="list-group-item external-event">Visita</a>
+                            <a class="list-group-item external-event">Manutenção</a>
+                            <a class="list-group-item external-event">Limpeza</a>
+                            <a class="list-group-item external-event">Entrega de Produto</a>                                    
                         </div>                            
                         
                         <div class="push-up-10">

@@ -30,11 +30,8 @@
 </div>
 <!-- END CONTENT FRAME -->
 @section('scripts')
-<script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
-<script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
 
-<script type="text/javascript" src="js/plugins/moment.min.js"></script>
-<script type="text/javascript" src="js/plugins/fullcalendar/fullcalendar.min.js"></script>
+
 @endsection
 
 @endsection

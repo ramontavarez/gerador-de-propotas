@@ -1,13 +1,13 @@
 .page-container .page-content {
   min-height: 100vh; }
 
-table tbody tr {
+/*table tbody tr {
   border-left-width: 3px; }
   table tbody tr:hover {
     background: #faf8f0 !important;
     border-left: 3px solid #8a6d3b; }
     table tbody tr:hover td {
       background: transparent !important;
-      color: #8a6d3b; }
+      color: #8a6d3b; }*/
 
 /*# sourceMappingURL=app.css.map */

@@ -3094,7 +3094,7 @@ body.page-container-boxed.wall_10 {
 .x-navigation.x-navigation-minimized > li.xn-logo > a:first-child {
   padding: 0px;
   width: 50px;
-  background-image: url("../img/logo-small.png");
+  background-image: url("../img/logo-fs.png");
 }
 .x-navigation.x-navigation-minimized .xn-search input {
   width: 30px;
@@ -3251,7 +3251,7 @@ body.page-container-boxed.wall_10 {
 .x-navigation > li.xn-logo > a:first-child {
   font-size: 0px;
   text-indent: -9999px;
-  background: url("../img/logo.png") top center no-repeat #e34724;
+  background: url("../img/logo-gerador.png") top center no-repeat #e34724;
   padding: 0px;
   border-bottom: 0px;
   color: #FFF;
