@@ -8,45 +8,50 @@
                 
                 <div class="panel panel-default">
                     <div class="panel-body">                            
-                        <h2>PROPOSTA <strong>#Y14-152</strong></h2>
-                        <div class="push-down-10 pull-right">
+                        <!-- <h2>PROPOSTA <strong>#Y14-152</strong></h2> -->
+                        <!-- <div class="push-down-10 pull-right">
                             <button class="btn btn-default"><span class="fa fa-print"></span> Print</button>                                        
-                        </div>
+                        </div> -->
                         <!-- INVOICE -->
-                        <div class="invoice">
-
-                            <div class="row">
-                                <div class="col-md-4">
-
-                                    <div class="invoice-address">
-                                        <h5>Contratado:</h5>
-                                        <h6>FS Refrigeração</h6>
-                                        <p>Vinicius</p>
-                                        <p>45 StreetName St.</p>
-                                        <p>City, Country, 00000</p>
-                                        <p>Phone: +98(765) 432-10-98</p>
-                                        <p>CNPJ: 37.713.422/0001-14</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="header-proposta">
+                                    <div class="invoice-logo ">
+                                        <img src="img/logo1.png" height="90px">
                                     </div>
 
+                                    <div class="cabecalho-proposta">
+                                            <h3>FS Refrigeração</h3>
+                                            <p>45 StreetName St. City, Country, 00000</p>
+                                            <p>Phone: +98(765) 432-10-98</p>
+                                            <p>contato@fsrefrigeracao.com.br</p>
+                                            <p>CNPJ: 37.713.422/0001-14</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
+                            </div>
+                        </div>
+                        <div class="invoice">
 
-                                    <div class="invoice-address">
+                            <div class="row sub-header">
+                                
+                                <div class="col-md-8">
+
+                                    <blockquote class="contratante">
                                         <h5>Contratante:</h5>
-                                        <h6>Empresa do Cliente</h6>
-                                        <p>Nome do Cliente</p>
-                                        <p>15 Nameofstreet St.</p>
-                                        <p>City, Country, 00000</p>
+                                        <h6>Empresa/Cliente</h6>
+                                        <p>15 Nameofstreet St. City, Country, 00000</p>
                                         <p>Phone: +01(234) 567-89-01</p>
                                         <p>CNPJ: 37.713.422/0001-14</p>
-                                    </div>                                        
+                                    </blockquote>                                        
 
                                 </div>
                                 <div class="col-md-4">
 
-                                    <div class="invoice-address">
-                                        <h5>Proposta</h5>
-                                        <table class="table table-striped">
+                                    <div class="proposta-infos">
+                                        <h3>Proposta#ID-1</h3>
+                                        <p><strong>Data:</strong> {{date('d/m/Y')}}</p>
+                                        <p><strong>Data de Vencimento:</strong> {{date('d/m/Y')}}</p>
+                                      <!--   <table class="table table-striped">
                                             <tr>
                                                 <td width="200">Número da Proposta:</td><td class="text-right">#Y14-152</td>
                                             </tr>
@@ -56,7 +61,7 @@
                                             <tr>
                                                 <td><strong>Total:</strong></td><td class="text-right"><strong>$2,600.00</strong></td>
                                             </tr>
-                                        </table>
+                                        </table> -->
 
                                     </div>                                        
 
@@ -117,10 +122,30 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis sed mi sit amet porta.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis sed mi sit amet porta.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis sed mi sit amet porta.</p>
                                 </div>
                             </div>
-                            
 
                         </div>
                         <!-- END INVOICE -->
+
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                                    <div class="col-md-8">
+                                        <p>De acordo em:</p>
+                                        <p>____/____/_________</p>
+                                        <p class="assinatura-contratante">_____________________________________________________________________</p>
+                                        <span>Ass./Carimbo</span>
+                                    </div>   
+
+                                    <div class="col-md-4">
+                                        <p class="assinatura-contratado">
+                                        FS Refrigeração<br>
+                                        Razão social da empresa proponente
+                                        </p>
+                                    </div> 
+                           
+                        </div>
 
                     </div>
                 </div>

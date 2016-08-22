@@ -14,6 +14,7 @@
 		<link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <link rel="stylesheet" type="text/css" id="theme" href="public/css/animate/animate.min.css"/>
 		<link rel="stylesheet" type="text/css" id="theme" href="css/app.css"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="css/proposta.css"/>
         <!-- EOF CSS INCLUDE -->
 
 
@@ -53,7 +54,7 @@
 
                     <li>
                         <a href="/templates-proposta"><span class="fa fa-file"></span>
-                        <span class="xn-text">Proposta</span></a>
+                        <span class="xn-text">Textos</span></a>
                     </li>
 
                     <li>
@@ -64,7 +65,7 @@
                     <li class="xn-title">Calendário</li>
 
                     <li>
-                        <a href="/calendario"><span class="fa fa-calendar"></span>
+                        <a href="/"><span class="fa fa-calendar"></span>
                         <span class="xn-text">Serviços</span></a>
                     </li>
 
@@ -186,6 +187,7 @@
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
         <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
         <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-datepicker.js"></script>
         <!-- END PLUGINS -->
         <script type="text/javascript" src="js/plugins/summernote/summernote.js"></script>
         <!-- ANGULAR -->

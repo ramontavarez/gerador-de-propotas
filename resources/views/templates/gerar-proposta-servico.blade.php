@@ -45,7 +45,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Data</label>
                                             <div class="col-md-10">
-                                                <input type="date" name="data" class="form-control" >
+                                                <input type="date" name="data" class="form-control datepicker" >
                                             </div>
                                         </div>
 
@@ -55,7 +55,7 @@
 
                              <div class="panel panel-default">
                              <div class="panel-heading" style="background:#fff">
-                                <h3 class="panel-title"><strong>Proposta</strong></h3>
+                                <h3 class="panel-title"><strong>Textos</strong></h3>
                              </div>
                                 <div class="panel-body">
 
