@@ -14,8 +14,8 @@
 
 .header-proposta {
 	display: block;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #eee;
+	padding-bottom: 18px;
+	border-bottom: 1px solid #ccc;
 }
 
 .invoice-logo {
@@ -32,9 +32,21 @@
 	padding-top:0;
 }
 
+.invoice .contratante h6 {
+	font-weight: normal;
+}
+
+.invoice .contratante h4 {
+	font-size: 20px;
+}
+
+
+
 .invoice .proposta-infos h3 {
 	margin-top:0;
 	padding-top:0;
+	font-size:22px;
+	color:#0588A6;
 }
 
 .invoice .proposta-infos {

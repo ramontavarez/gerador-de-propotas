@@ -37,20 +37,21 @@
                                 <div class="col-md-8">
 
                                     <blockquote class="contratante">
-                                        <h5>Contratante:</h5>
-                                        <h6>Empresa/Cliente</h6>
+                                        <h6>CONTRATANTE:</h6>
+                                        <h4>Empresa/Cliente</h4>
                                         <p>15 Nameofstreet St. City, Country, 00000</p>
                                         <p>Phone: +01(234) 567-89-01</p>
-                                        <p>CNPJ: 37.713.422/0001-14</p>
+                                        <!-- <p>CNPJ: 37.713.422/0001-14</p> -->
+                                        <p><a href="#" >contratante@gmail.com</a></p>
                                     </blockquote>                                        
 
                                 </div>
                                 <div class="col-md-4">
 
                                     <div class="proposta-infos">
-                                        <h3>Proposta#ID-1</h3>
+                                        <h3>PROPOSTA#ID-1</h3>
                                         <p><strong>Data:</strong> {{date('d/m/Y')}}</p>
-                                        <p><strong>Data de Vencimento:</strong> {{date('d/m/Y')}}</p>
+                                        <p><strong>Validade:</strong> {{date('d/m/Y')}}</p>
                                       <!--   <table class="table table-striped">
                                             <tr>
                                                 <td width="200">Número da Proposta:</td><td class="text-right">#Y14-152</td>
@@ -129,7 +130,7 @@
                         <div class="row">
                             
                             <div class="col-md-12">
-                                <hr>
+                                <hr style="border-color:#ccc">
                             </div>
                                     <div class="col-md-8">
                                         <p>De acordo em:</p>
