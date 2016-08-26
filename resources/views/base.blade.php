@@ -65,14 +65,14 @@
                     <li class="xn-title">Calendário</li>
 
                     <li>
-                        <a href="/"><span class="fa fa-calendar"></span>
+                        <a href="/calendario"><span class="fa fa-calendar"></span>
                         <span class="xn-text">Serviços</span></a>
                     </li>
 
                     <li class="xn-title">Dados da Empresa</li>
 
                     <li>
-                        <a href="/"><span class="fa fa-gear"></span>
+                        <a href="/configuracoes-gerais"><span class="fa fa-gear"></span>
                         <span class="xn-text">Configurações Gerais</span></a>
                     </li>
 

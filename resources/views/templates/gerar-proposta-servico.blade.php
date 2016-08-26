@@ -22,12 +22,12 @@
                                 <div class="panel-body">
 
                                     <form class="form-horizontal" role="form">
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label class="col-sm-2 control-label">Contratado</label>
                                             <div class="col-md-10">
                                                 <input type="text" name="contratado" class="form-control"></input>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Contratante</label>
                                             <div class="col-md-10">
@@ -36,9 +36,23 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">Contato</label>
+                                            <label class="col-sm-2 control-label">Endereço</label>
                                             <div class="col-md-10">
-                                                <input type="text" name="contato" class="form-control" >
+                                                <input type="text" name="endereco" class="form-control" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Telefone</label>
+                                            <div class="col-md-10">
+                                                <input type="text" name="telefone" class="form-control" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Email</label>
+                                            <div class="col-md-10">
+                                                <input type="text" name="email" class="form-control" >
                                             </div>
                                         </div>
 
