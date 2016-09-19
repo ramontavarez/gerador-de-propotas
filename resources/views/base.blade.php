@@ -1,3 +1,9 @@
+<?php 
+use App\Proposta;
+
+$propostas = Proposta::where('status', 1)->get();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -21,6 +27,7 @@
     </head>
     <body>
 
+
         <!-- START PAGE CONTAINER -->
         <div class="page-container">
 
@@ -33,13 +40,18 @@
                         <a href="/" class="x-navigation-control"></a>
                     </li>
                     <li class="xn-title">Gerar Propostas</li>
-                    <li>
+                    @foreach($propostas as $proposta)
+                        <li>
+                            <a href="/gerar-proposta-servico"><span class="fa fa-file-o"></span> <span class="xn-text"> {{$proposta->nome}} </span></a>
+                        </li>
+                    @endforeach
+                   <!--  <li>
                         <a href="/gerar-proposta-servico"><span class="fa fa-file-o"></span> <span class="xn-text">Proposta de Serviço</span></a>
                     </li>
 
                     <li>
                         <a href="/gerar-proposta-venda"><span class="fa fa-file-o"></span> <span class="xn-text">Proposta de Venda</span></a>
-                    </li>
+                    </li> -->
 
                     <li class="xn-title">Consultar Propostas</li>
                     <li>

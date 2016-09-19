@@ -67,59 +67,81 @@
                                 </div>
                             </div>
 
-                             <div class="panel panel-default">
+                             <div class="panel panel-default nav-tabs-vertical"">
                              <div class="panel-heading" style="background:#fff">
                                 <h3 class="panel-title"><strong>Textos</strong></h3>
                              </div>
-                                <div class="panel-body">
+                              
 
-                                    <form class="form-horizontal" role="form">
-
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Objetivo da Proposta</label>
-                                            <div class="col-md-10">
-                                                <textarea class="summernote "></textarea>
-                                            </div>
+                                <!-- START VERTICAL TABS WITH HEADING -->
+                                           
+                                <div class="tabs">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab19" data-toggle="tab">Objetivo da Proposta</a></li>
+                                        <li><a href="#tab20" data-toggle="tab">Definição do Serviço</a></li>
+                                        <li><a href="#tab21" data-toggle="tab">Formas de Pagamento</a></li>
+                                    </ul>                    
+                                    <div class="panel-body tab-content">
+                                        <div class="tab-pane active" id="tab19">
+                                                 <textarea class="summernote1"></textarea>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Definição do Serviço</label>
-                                            <div class="col-md-10">
-                                                <textarea class="summernote "></textarea>
-                                            </div>
+                                        <div class="tab-pane" id="tab20">
+                                            <textarea class="summernote1"></textarea>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Formas de Pagamento</label>
-                                            <div class="col-md-10">
-                                                <textarea class="summernote "></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Reajuste</label>
-                                            <div class="col-md-10">
-                                                <textarea class="summernote "></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Local e Início dos Serviços</label>
-                                            <div class="col-md-10">
-                                                <textarea class="summernote "></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Carga Horária</label>
-                                            <div class="col-md-10">
-                                                <textarea class="summernote "></textarea>
-                                            </div>
-                                        </div>
-
-
-                                    </form>
+                                        <div class="tab-pane" id="tab21">
+                                           <textarea class="summernote1"></textarea>
+                                        </div>                        
+                                    </div>
                                 </div>
+                                             
+
+                                        <!-- <form class="form-horizontal" role="form">
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Objetivo da Proposta</label>
+                                                <div class="col-md-10">
+                                                    <textarea class="summernote "></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Definição do Serviço</label>
+                                                <div class="col-md-10">
+                                                    <textarea class="summernote "></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Formas de Pagamento</label>
+                                                <div class="col-md-10">
+                                                    <textarea class="summernote "></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Reajuste</label>
+                                                <div class="col-md-10">
+                                                    <textarea class="summernote "></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Local e Início dos Serviços</label>
+                                                <div class="col-md-10">
+                                                    <textarea class="summernote "></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Carga Horária</label>
+                                                <div class="col-md-10">
+                                                    <textarea class="summernote "></textarea>
+                                                </div>
+                                            </div>
+
+
+                                        </form> -->
+                               
                             </div>
 
 
@@ -173,6 +195,24 @@
         @section('scripts')
         <script src="js/jquery.maskMoney.js"></script>
         <script src="js/tabelas-proposta.js"></script>
+        <script>
+            /* Extended summernote editor */
+            if($(".summernote1").length > 0){
+                $(".summernote1").summernote({height: 150,
+                    width:800,
+                                             codemirror: {
+                                                mode: 'text/html',
+                                                htmlMode: true,
+                                                lineNumbers: true,
+                                                theme: 'default'
+                                              },
+                                                      toolbar: [
+                                                          ["style", ["bold", "italic", "underline", "clear"]],
+                                                          ["insert",[]]                                                          
+                                                      ]
+                });
+            }
+        </script>
        
         @endsection
 

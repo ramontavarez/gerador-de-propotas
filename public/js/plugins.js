@@ -345,6 +345,7 @@ $(function() {
             /* Extended summernote editor */
             if($(".summernote").length > 0){
                 $(".summernote").summernote({height: 150,
+                    
                                              codemirror: {
                                                 mode: 'text/html',
                                                 htmlMode: true,

@@ -48,7 +48,7 @@
                                     <option value="">Escolha um tipo</option>
                                     <option value="1">Texto</option>
                                     <option value="2">Select</option>
-                                    <option value="3">Valor($)</option>
+                                    <option value="3">Moeda</option>
                                 </select>
                                 <span class="form-bar"></span>
                                 <label for="exampleInputSelect1">Tipo</label>
