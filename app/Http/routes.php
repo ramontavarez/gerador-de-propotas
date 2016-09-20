@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/gerar-proposta/{id}', [
+    'as' => 'gerar-proposta', 'uses' => 'PropostaController@index'
+]);
+
 Route::get('/{name?}', [
     'as' => 'page', 'uses' => 'PageController@showPage'
 ]);

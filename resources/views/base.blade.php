@@ -17,10 +17,10 @@ $propostas = Proposta::where('status', 1)->get();
         <!-- END META SECTION -->
 
         <!-- CSS INCLUDE -->
-		<link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
-        <link rel="stylesheet" type="text/css" id="theme" href="public/css/animate/animate.min.css"/>
-		<link rel="stylesheet" type="text/css" id="theme" href="css/app.css"/>
-        <link rel="stylesheet" type="text/css" id="theme" href="css/proposta.css"/>
+		<link rel="stylesheet" type="text/css" id="theme" href="{{ asset('css/theme-default.css') }}"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="{{ asset('css/animate/animate.min.css')}}"/>
+		<link rel="stylesheet" type="text/css" id="theme" href="{{ asset('css/app.css') }}"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="{{ asset('css/proposta.css') }}"/>
         <!-- EOF CSS INCLUDE -->
 
 
@@ -42,7 +42,7 @@ $propostas = Proposta::where('status', 1)->get();
                     <li class="xn-title">Gerar Propostas</li>
                     @foreach($propostas as $proposta)
                         <li>
-                            <a href="/gerar-proposta-servico"><span class="fa fa-file-o"></span> <span class="xn-text"> {{$proposta->nome}} </span></a>
+                            <a href="/gerar-proposta/{{$proposta->id}}"><span class="fa fa-file-o"></span> <span class="xn-text"> {{$proposta->nome}} </span></a>
                         </li>
                     @endforeach
                    <!--  <li>
@@ -194,14 +194,14 @@ $propostas = Proposta::where('status', 1)->get();
 
     <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
-        <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
-        <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
-        <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-ui.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap.min.js') }}"></script>
+        <script type='text/javascript' src="{{ asset('js/plugins/icheck/icheck.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-datepicker.js') }}"></script>
         <!-- END PLUGINS -->
-        <script type="text/javascript" src="js/plugins/summernote/summernote.js"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/summernote/summernote.js') }}"></script>
         <!-- ANGULAR -->
 <!--    <script type="text/javascript" src="js/plugins/angular/angular.min.js"></script>
         <script type="text/javascript" src="js/plugins/angular/angular-route.min.js"></script>
@@ -216,8 +216,8 @@ $propostas = Proposta::where('status', 1)->get();
 
         <!-- START TEMPLATE -->
 
-        <script type="text/javascript" src="js/plugins.js"></script>
-        <script type="text/javascript" src="js/actions.js"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/actions.js') }}"></script>
         <!-- END TEMPLATE -->
         @yield('scripts')
 
