@@ -13,4 +13,5 @@ class PropostaController extends Controller
     	return view('templates.gerar-proposta', ['proposta' => $proposta]);
 
     }
+
 }

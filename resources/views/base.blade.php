@@ -65,7 +65,7 @@ $propostas = Proposta::where('status', 1)->get();
                     <li class="xn-title">Templates</li>
 
                     <li>
-                        <a href="/templates-proposta"><span class="fa fa-file"></span>
+                        <a href="/templates-texto"><span class="fa fa-file"></span>
                         <span class="xn-text">Textos</span></a>
                     </li>
 

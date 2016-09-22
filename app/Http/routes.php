@@ -15,6 +15,14 @@ Route::get('/gerar-proposta/{id}', [
     'as' => 'gerar-proposta', 'uses' => 'PropostaController@index'
 ]);
 
+Route::post('/salvar-template-texto', [
+    'as' => 'salvar-template-texto', 'uses' => 'TextoTemplateController@salvar'
+]);
+
+Route::post('/atualizar-template-texto', [
+    'as' => 'atualizar-template-texto', 'uses' => 'TextoTemplateController@atualizar'
+]);
+
 Route::get('/{name?}', [
     'as' => 'page', 'uses' => 'PageController@showPage'
 ]);
