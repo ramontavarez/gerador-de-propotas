@@ -14,13 +14,13 @@ class PropostaTableSeeder extends Seeder
     {
     	Model::unguard();
 
-       	DB::table('proposta')->insert([
+       	DB::table('propostas')->insert([
             'status' => 1,
             'nome' => 'Proposta de Serviço',
             'user_id' => 1,
         ]);
 
-        DB::table('proposta')->insert([
+        DB::table('propostas')->insert([
             'status' => 1,
             'nome' => 'Proposta de Venda',
             'user_id' => 1,

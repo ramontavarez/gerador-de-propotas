@@ -156,9 +156,22 @@ $propostas = Proposta::where('status', 1)->get();
                 </ul>
                 <!-- END X-NAVIGATION VERTICAL -->
 
+                
 
+                <div class="message-box message-box-info animated fadeIn open" id="carregando" style="display:none">
+                    <div class="mb-container">
+                        <div class="mb-middle">
+                            <div class="mb-title"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Carregando</div>
+                            <div class="mb-content">
+                                <p></p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
 
                 <div class="">
+
                         @yield('content')
                 </div>
 

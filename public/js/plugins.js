@@ -640,3 +640,4 @@ Object.size = function(obj) {
     }
     return size;
 };
+

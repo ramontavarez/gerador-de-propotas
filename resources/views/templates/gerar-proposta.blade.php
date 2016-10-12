@@ -1,5 +1,6 @@
 @extends('base')
     @section('content')
+
                 <ul class="breadcrumb">
                     <li><a href="/">Home</a></li>
                     <li class="active">Gerar proposta de serviço</li>
@@ -77,20 +78,26 @@
                                            
                                 <div class="tabs">
                                     <ul class="nav nav-tabs">
-                                        <li class="active"><a href="#tab19" data-toggle="tab">Objetivo da Proposta</a></li>
-                                        <li><a href="#tab20" data-toggle="tab">Definição do Serviço</a></li>
-                                        <li><a href="#tab21" data-toggle="tab">Formas de Pagamento</a></li>
+                                        @foreach($templatesTexto as $key => $template)
+                                        <li @if($key == 0)class="active"@endif><a href="#{{$template->id}}" data-toggle="tab">{{$template->titulo}}</a></li>
+                                        @endforeach
+                                        <!-- <li><a href="#tab20" data-toggle="tab">Definição do Serviço</a></li>
+                                        <li><a href="#tab21" data-toggle="tab">Formas de Pagamento</a></li> -->
                                     </ul>                    
                                     <div class="panel-body tab-content">
-                                        <div class="tab-pane active" id="tab19">
-                                                 <textarea class="summernote1"></textarea>
+                                        @foreach($templatesTexto as $key => $template)
+                                           
+                                        <div class="tab-pane  @if($key == 0) active @endif" id="{{$template->id}}">
+                                            <textarea class="summernote1"></textarea>
                                         </div>
-                                        <div class="tab-pane" id="tab20">
+                                        @endforeach
+
+                                       <!--  <div class="tab-pane" id="tab20">
                                             <textarea class="summernote1"></textarea>
                                         </div>
                                         <div class="tab-pane" id="tab21">
                                            <textarea class="summernote1"></textarea>
-                                        </div>                        
+                                        </div>   -->                      
                                     </div>
                                 </div>
                                              

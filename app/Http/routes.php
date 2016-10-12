@@ -16,11 +16,19 @@ Route::get('/gerar-proposta/{id}', [
 ]);
 
 Route::post('/salvar-template-texto', [
-    'as' => 'salvar-template-texto', 'uses' => 'TextoTemplateController@salvar'
+    'as' => 'salvar-template-texto', 'uses' => 'TemplateTextoController@salvar'
 ]);
 
 Route::post('/atualizar-template-texto', [
-    'as' => 'atualizar-template-texto', 'uses' => 'TextoTemplateController@atualizar'
+    'as' => 'atualizar-template-texto', 'uses' => 'TemplateTextoController@atualizar'
+]);
+
+Route::post('/get-propostas-from-texto', [
+    'as' => 'get-propostas-from-texto', 'uses' => 'TemplateTextoController@getPropostas'
+]);
+
+Route::post('/salvar-template-tabela', [
+    'as' => 'salvar-template-tabela', 'uses' => 'TemplateTabelaController@salvar'
 ]);
 
 Route::get('/{name?}', [

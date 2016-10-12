@@ -5,11 +5,11 @@
         <li class="active">Templates - Proposta</li>
     </ul>
 <?php
-use App\TextoTemplate;
+use App\TemplateTexto;
 use App\Proposta;
 
 $propostas = Proposta::where('status', 1)->get();
-$templates = TextoTemplate::where('status', 1)->get();
+$templates = TemplateTexto::get();
 
 ?>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -60,22 +60,42 @@ $templates = TextoTemplate::where('status', 1)->get();
 <!-- START CONTENT FRAME -->
         <div class="content-frame">
             
+            
+            <div class="message-box message-box-success animated fadeIn 
             @if(session()->has('success'))
-            <div class="message-box message-box-success animated fadeIn open" id="message-box-success">
-            <div class="mb-container">
-                <div class="mb-middle">
-                    <div class="mb-title"><span class="fa fa-check"></span> Success</div>
-                    <div class="mb-content">
-                        <p>{{ session()->get('success') }}</p>
-                    </div>
-                    <div class="mb-footer">
-                        <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+            open
+            @endif" id="message-box-success">
+            
+                <div class="mb-container">
+                    <div class="mb-middle">
+                        <div class="mb-title"><span class="fa fa-check"></span> Success</div>
+                        <div class="mb-content">
+                            <p>{{ session()->get('success') }}</p>
+                        </div>
+                        <div class="mb-footer">
+                            <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            
+            <div class="message-box message-box-success animated fadeIn " id="alert-success">
+                <div class="mb-container">
+                    <div class="mb-middle">
+                        <div class="mb-title"><span class="fa fa-check"></span> Texto Atualizado!</div>
+                        <div class="mb-content">
+                            <p></p>
+                        </div>
+                        <div class="mb-footer">
+                            <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            @endif
+            
 
+         
             <!-- START CONTENT FRAME TOP -->
             <div class="content-frame-top">                        
                 <div class="page-title">                    
@@ -152,7 +172,7 @@ $templates = TextoTemplate::where('status', 1)->get();
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Pertence à:</label>
                                 <div class="col-md-10">
-                                    <select multiple class="form-control select" id="template-mid" name="mid">
+                                    <select multiple class="form-control " id="template-mid" name="mid">
                                     @foreach($propostas as $proposta)
                                         <option value="{{$proposta->id}}">{{$proposta->nome}}</option>
                                     @endforeach
@@ -175,7 +195,7 @@ $templates = TextoTemplate::where('status', 1)->get();
                     </div>
                 </div>
                 
-                <button class="btn btn-primary pull-right m-bottom-15">Salvar</button>  
+                <button class="btn btn-primary pull-right m-bottom-15" id="botao-atualizar-texto">Salvar</button>  
                 </form>    
             </div>
             <!-- END CONTENT FRAME BODY -->
@@ -186,28 +206,83 @@ $templates = TextoTemplate::where('status', 1)->get();
 <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
 <script>
 
+        $("#template-mid").selectpicker();
+
+        $("#template-mid").on("change", function(){
+            if($(this).val() == "" || null === $(this).val()){
+                if(!$(this).attr("multiple"))
+                    $(this).val("").find("option").removeAttr("selected").prop("selected",false);
+            }else{
+                $(this).find("option[value="+$(this).val()+"]").attr("selected",true);
+            }
+        });
+
+
         $(".note-toolbar").css('background', "#fff");
         $(".note-editor").css('border', 0);
         $(".note-statusbar").hide();
 
     function selecionarTemplate(template) {
-        console.log(template);
-        $('#template-titulo-display').text(template.titulo);
-        $('#template-titulo').val(template.titulo);
-        $('#template-descricao').val(template.descricao);
-        $('.note-editable').text(template.texto);
-        $('.note-codable').attr('name', 'texto');
-        $('.note-codable').text(template.texto);
-        $('#template-texto-id').val(template.id);
+        
+        getPropostas(template.id);
 
-        if(template.status == 1) {
-            $('#template-status').prop('checked', true);
-        } else {
-            $('#template-status').prop('checked', false);
-        }
+        // $('#template-titulo-display').text(template.titulo);
+        // $('#template-titulo').val(template.titulo);
+        // $('#template-descricao').val(template.descricao);
+        // $('.note-editable').text(template.texto);
+        // $('.note-codable').attr('name', 'texto');
+        // $('.note-codable').text(template.texto);
+        // $('#template-texto-id').val(template.id);
 
-        $('#template-status').val(template.status);
+        // if(template.status == 1) {
+        //     $('#template-status').prop('checked', true);
+        // } else {
+        //     $('#template-status').prop('checked', false);
+        // }
 
+        // $('#template-status').val(template.status);
+
+    }
+
+    function getPropostas(id) {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            beforeSend: function(){
+                $("#carregando").show(); 
+             },
+            method: "POST",
+            url: "/get-propostas-from-texto",
+            data: {
+                _token: CSRF_TOKEN,
+                id: id
+            },
+            dataType: 'JSON'
+        })
+        .done(function(data){
+
+            $("#carregando").hide(); 
+            var values = [];
+            $(data[1]).each(function(){
+                values.push(this.id);
+            });
+            $('#template-titulo-display').text(data[0].titulo);
+            $('#template-titulo').val(data[0].titulo);
+            $('#template-descricao').val(data[0].descricao);
+            $('.note-editable').text(data[0].texto);
+            $('.note-codable').attr('name', 'texto');
+            $('.note-codable').text(data[0].texto);
+            $('#template-texto-id').val(data[0].id);
+
+            if(data[0].status == 1) {
+                $('#template-status').prop('checked', true);
+            } else {
+                $('#template-status').prop('checked', false);
+            }
+
+            $('#template-status').val(data[0].status);
+            $("#template-mid").selectpicker('val', values);
+
+        });
     }
 
     //tratando checkbox de status
@@ -218,7 +293,7 @@ $templates = TextoTemplate::where('status', 1)->get();
             $(this).val(0);
         }
     });
-    //
+    //----------------------------
 
     $("#update-texto-form").on('submit', function(e){
         e.preventDefault();
@@ -228,11 +303,20 @@ $templates = TextoTemplate::where('status', 1)->get();
         var status = $('#template-status').val();
         var mid = $('#template-mid').val();
         var texto = $('.note-editable').html();
+        // var texto = $('#template-texto').val();
         var id = $('#template-texto-id').val();
-
+        console.log(texto);
+        atualizarTexto(titulo, descricao, status, mid, texto, id);
         // console.log(titulo, descricao, status, mid, texto);
+
+    });
+
+    function atualizarTexto(titulo, descricao, status, mid, texto, id) {
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
+             beforeSend: function(){
+                $("#carregando").show(); 
+             },
             method: "POST",
             url: "/atualizar-template-texto",
             data: {
@@ -247,9 +331,10 @@ $templates = TextoTemplate::where('status', 1)->get();
             dataType: 'JSON'
         })
         .done(function(data){
-            console.log(data);
+            $("#carregando").hide(); 
+            $("#alert-success").addClass('open');
         });
-    });
+    }
 
 
 </script>

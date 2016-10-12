@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Proposta extends Model
 {
-	 protected $table = 'proposta';
+	 protected $table = 'propostas';
     /**
     * The attributes that are mass assignable.
     *
@@ -15,4 +15,9 @@ class Proposta extends Model
     protected $fillable = [
         'status', 'nome', 'user_id',
     ];
+
+    public function textos()
+    {
+        return $this->belongsToMany('App\TemplateTexto', 'template_texto_proposta');
+    }
 }

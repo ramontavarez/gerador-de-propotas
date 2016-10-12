@@ -4,28 +4,34 @@
         <!-- <li><a href="/">Propostas</a></li>                     -->
         <li class="active">Templates - Tabela</li>
     </ul>
+<?php
+use App\TemplateTabela;
 
+$tabelas = TemplateTabela::get();
+?>
 
 <!-- MODAL NO HEAD -->
     <div class="modal animated fadeIn" id="modal_no_head" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true" >
         <div class="modal-dialog">
-            <div class="modal-content">                    
+            <div class="modal-content">    
+                <form role="form" class="form-material" method="POST" action="{{ route('salvar-template-tabela') }}">                
                 <div class="modal-body">
                     <h3>Adicionar novo template</h3>
                     <p>Preencha os campos</p>
-                        <form role="form" class="form-material">
+                            {!! csrf_field() !!} 
                             <div class="form-group">
-                                <input type="email" class="form-control" id="" required>                                            
+                                <input type="text" class="form-control" name="titulo" id="" required>                                            
                                 <span class="form-bar"></span>
                                 <label for="exampleInputEmail1">Título</label>
                             </div>
-
-                        </form>                             
+                            
+                                                  
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                    <button type="submit" class="btn btn-primary" >Salvar</button>
                 </div>
+                </form>  
             </div>
         </div>
     </div> 
@@ -67,6 +73,24 @@
 
 <!-- START CONTENT FRAME -->
         <div class="content-frame">
+
+        <div class="message-box message-box-success animated fadeIn 
+            @if(session()->has('success'))
+            open
+            @endif" id="message-box-success">
+            
+                <div class="mb-container">
+                    <div class="mb-middle">
+                        <div class="mb-title"><span class="fa fa-check"></span> Success</div>
+                        <div class="mb-content">
+                            <p>{{ session()->get('success') }}</p>
+                        </div>
+                        <div class="mb-footer">
+                            <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <!-- START CONTENT FRAME TOP -->
             <div class="content-frame-top">                        
@@ -90,18 +114,18 @@
                 </div>
 
                 <div class="panel-body list-group list-group-contacts"">
+                    
+                    @foreach($tabelas as $tabela)
+                    <a href="#" class="list-group-item">                                   
+                        <span class="contacts-title" >{{$tabela->titulo}}</span>
+                        <p>Vazio</p>                                    
+                    </a>
+                    @endforeach
 
-                    <a href="#" class="list-group-item">                                                       
-                        
-                        <span class="contacts-title" >Serviços</span>
-                        <p>Proposta de Serviço</p>                                    
-                    </a>     
-
-                    <a href="#" class="list-group-item">                                                       
-                        
+                   <!--  <a href="#" class="list-group-item">
                         <span class="contacts-title" >Produtos</span>
                         <p>Proposta de Venda</p>                                   
-                    </a>   
+                    </a>    -->
     
                     </div>
                 </div>
