@@ -119,7 +119,7 @@ $templates = TemplateTexto::get();
 
                     <div class="panel-body list-group list-group-contacts"">
                         @foreach($templates as $template)
-                        <a style="cursor:pointer" 
+                        <button 
                         onclick="selecionarTemplate({{$template}})" 
                         class="list-group-item">                  
                             <span class="contacts-title">{{$template->titulo}}</span>
@@ -130,7 +130,7 @@ $templates = TemplateTexto::get();
                             {{$template->descricao}}
                             @endif
                             </p>                                    
-                        </a>     
+                        </button>     
                         @endforeach
                     </div>
                 </div>
@@ -205,7 +205,7 @@ $templates = TemplateTexto::get();
 @section('scripts')
 <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
 <script>
-
+        $('.content-frame-body').hide();
         $("#template-mid").selectpicker();
 
         $("#template-mid").on("change", function(){
@@ -223,7 +223,7 @@ $templates = TemplateTexto::get();
         $(".note-statusbar").hide();
 
     function selecionarTemplate(template) {
-        
+        $('.content-frame-body').fadeIn();
         getPropostas(template.id);
 
         // $('#template-titulo-display').text(template.titulo);

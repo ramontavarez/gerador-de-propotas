@@ -13,4 +13,9 @@ class TemplateTabelaController extends Controller
     	TemplateTabela::create($request->all());
     	return redirect()->route('page', ['templates-tabela'])->with('success', 'Novo template criado com sucesso!');
 	}
+
+	public function getTabela(Request $request) {
+		$tabela = TemplateTabela::find($request->get('id'));
+		return json_encode([$tabela, 'lalala']);
+	}
 }

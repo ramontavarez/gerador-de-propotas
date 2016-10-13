@@ -31,6 +31,10 @@ Route::post('/salvar-template-tabela', [
     'as' => 'salvar-template-tabela', 'uses' => 'TemplateTabelaController@salvar'
 ]);
 
+Route::post('/get-tabela', [
+    'as' => 'get-tabela', 'uses' => 'TemplateTabelaController@getTabela'
+]);
+
 Route::get('/{name?}', [
     'as' => 'page', 'uses' => 'PageController@showPage'
 ]);

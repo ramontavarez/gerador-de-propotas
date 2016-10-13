@@ -6,8 +6,10 @@
     </ul>
 <?php
 use App\TemplateTabela;
+use App\Proposta;
 
 $tabelas = TemplateTabela::get();
+$propostas = Proposta::where('status', 1)->get();
 ?>
 
 <!-- MODAL NO HEAD -->
@@ -23,6 +25,15 @@ $tabelas = TemplateTabela::get();
                                 <input type="text" class="form-control" name="titulo" id="" required>                                            
                                 <span class="form-bar"></span>
                                 <label for="exampleInputEmail1">Título</label>
+                            </div>
+
+                            <div class="form-group">
+                                <select class="form-control" name="status">
+                                    <option value="1">Ativado</option>
+                                    <option value="0">Desativado</option>
+                                </select>
+                                <span class="form-bar"></span>
+                                <label for="">Status</label>
                             </div>
                             
                                                   
@@ -116,10 +127,10 @@ $tabelas = TemplateTabela::get();
                 <div class="panel-body list-group list-group-contacts"">
                     
                     @foreach($tabelas as $tabela)
-                    <a href="#" class="list-group-item">                                   
+                    <button class="list-group-item" onclick="selecionarTabela({{$tabela->id}})">                                   
                         <span class="contacts-title" >{{$tabela->titulo}}</span>
                         <p>Vazio</p>                                    
-                    </a>
+                    </button>
                     @endforeach
 
                    <!--  <a href="#" class="list-group-item">
@@ -136,14 +147,14 @@ $tabelas = TemplateTabela::get();
             <div class="content-frame-body">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h3>Título do template</h3>
+                        <h3 id="template-titulo-display">Título do template</h3>
                         <form class="form-horizontal" role="form">
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Status:</label>
                                 <div class="col-md-10">
                                     <label class="switch switch-small">
-                                        <input type="checkbox" checked="" value="0">
+                                        <input type="checkbox" checked="" id="template-status" value="0">
                                         <span></span>
                                     </label>
                                 </div>
@@ -152,7 +163,7 @@ $tabelas = TemplateTabela::get();
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Título:</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="" class="form-control">
+                                    <input type="text" id="template-titulo" name="" class="form-control">
                                 </div>
                             </div>
 
@@ -160,8 +171,9 @@ $tabelas = TemplateTabela::get();
                                 <label class="col-sm-2 control-label">Pertence à:</label>
                                 <div class="col-md-10">
                                     <select multiple class="form-control select">
-                                        <option>Proposta de Venda</option>
-                                        <option>Proposta de Serviço</option>
+                                        @foreach($propostas as $proposta)
+                                        <option value="{{$proposta->id}}">{{$proposta->nome}}</option>
+                                        @endforeach
                                     </select>  
                                 </div>
                             </div>
@@ -200,6 +212,7 @@ $tabelas = TemplateTabela::get();
                         </div>
                  
                 </div>
+                <button class="btn btn-primary pull-right">Salvar</button>
             </div>
             <!-- END CONTENT FRAME BODY -->
         </div>
@@ -208,7 +221,47 @@ $tabelas = TemplateTabela::get();
 @section('scripts')
 <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
 <script>
+   function selecionarTabela(id) {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            beforeSend: function(){
+                $("#carregando").show(); 
+             },
+            method: "POST",
+            url: "/get-tabela",
+            data: {
+                _token: CSRF_TOKEN,
+                id: id
+            },
+            dataType: 'JSON'
+        })
+        .done(function(data){
 
+            $("#carregando").hide(); 
+            // var values = [];
+            // $(data[1]).each(function(){
+            //     values.push(this.id);
+            // });
+
+            $('#template-titulo-display').text(data[0].titulo);
+            $('#template-titulo').val(data[0].titulo);
+            // $('#template-descricao').val(data[0].descricao);
+            // $('.note-editable').text(data[0].texto);
+            // $('.note-codable').attr('name', 'texto');
+            // $('.note-codable').text(data[0].texto);
+            // $('#template-texto-id').val(data[0].id);
+
+            if(data[0].status == 1) {
+                $('#template-status').prop('checked', true);
+            } else {
+                $('#template-status').prop('checked', false);
+            }
+
+            $('#template-status').val(data[0].status);
+            // $("#template-mid").selectpicker('val', values);
+
+        });
+   }
 </script>
 @endsection
 
