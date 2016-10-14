@@ -6,6 +6,7 @@
     </ul>
 <?php
 use App\TemplateTabela;
+use App\TemplateTabelaTh;
 use App\Proposta;
 
 $tabelas = TemplateTabela::get();
@@ -49,19 +50,20 @@ $propostas = Proposta::where('status', 1)->get();
 
     <div class="modal animated fadeIn" id="modal_add_campo" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true" >
         <div class="modal-dialog">
-            <div class="modal-content">                    
+            <div class="modal-content">   
+                <form role="form" class="form-material" method="POST" action="{{ route('salvar-th') }}">                 
                 <div class="modal-body">
                     <h3>Adicionar novo campo</h3>
-                        <form role="form" class="form-material">
-
+                        
+                            <input type="hidden" id="tabela-id">
                             <div class="form-group">
-                                <input type="email" class="form-control" id="" required>             
+                                <input type="email" class="form-control" id="" name="nome" required>             
                                 <span class="form-bar"></span>
                                 <label for="exampleInputEmail1">Título</label>
                             </div>
 
                             <div class="form-group">
-                                <select class="form-control" id="exampleInputSelect1">
+                                <select class="form-control" name="tipo" id="exampleInputSelect1">
                                     <option value="">Escolha um tipo</option>
                                     <option value="1">Texto</option>
                                     <option value="2">Select</option>
@@ -71,12 +73,13 @@ $propostas = Proposta::where('status', 1)->get();
                                 <label for="exampleInputSelect1">Tipo</label>
                             </div>
 
-                        </form>                             
+                                                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
                 </div>
+                </form> 
             </div>
         </div>
     </div> 
@@ -190,24 +193,20 @@ $propostas = Proposta::where('status', 1)->get();
                         </ul>
                     </div>
                   
-                        <div class="panel-body list-group list-group-contacts">                                
-                            <a href="#" class="list-group-item">                                    
-                                <span class="contacts-title">Serviço</span>
-                                <p><strong>Tipo:</strong> Select</p>                                    
-                                <div class="list-group-controls">
-                                    <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
-                                     <button class="btn btn-danger btn-rounded"><span class="fa fa-trash"></span></button>
-                                </div>                                    
-                            </a>                                                                
-                            <a href="#" class="list-group-item">                                    
-                                
+                        <div class="panel-body list-group list-group-contacts" id="lista-de-campos"> 
+
+                                                               
+                            
+                                  
+                            
+                            <!-- <a href="#" class="list-group-item">                                    
                                 <span class="contacts-title">Valor</span>
                                 <p><strong>Tipo:</strong> Valor($)</p> 
                                 <div class="list-group-controls">
                                     <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
                                     <button class="btn btn-danger btn-rounded"><span class="fa fa-trash"></span></button>
                                 </div>                                    
-                            </a>
+                            </a> -->
                               
                         </div>
                  
@@ -219,8 +218,23 @@ $propostas = Proposta::where('status', 1)->get();
         <!-- END CONTENT FRAME -->
 
 @section('scripts')
+
+<script type="template/ajax" id="template-campo">
+    <a href="#" class="list-group-item">                                    
+        <span class="contacts-title">Serviço</span>
+        <p><strong>Tipo:</strong> Select</p>                                    
+        <div class="list-group-controls">
+            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
+             <button class="btn btn-danger btn-rounded"><span class="fa fa-trash"></span></button>
+        </div>                                    
+    </a>    
+</script>   
+
 <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
 <script>
+    var campo = $("#template-campo").html();
+    
+    $("#lista-de-campos").append(campo);
    function selecionarTabela(id) {
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
@@ -245,6 +259,7 @@ $propostas = Proposta::where('status', 1)->get();
 
             $('#template-titulo-display').text(data[0].titulo);
             $('#template-titulo').val(data[0].titulo);
+            $('#tabela-id').val(data[0].id);
             // $('#template-descricao').val(data[0].descricao);
             // $('.note-editable').text(data[0].texto);
             // $('.note-codable').attr('name', 'texto');
@@ -262,6 +277,8 @@ $propostas = Proposta::where('status', 1)->get();
 
         });
    }
+
+
 </script>
 @endsection
 
