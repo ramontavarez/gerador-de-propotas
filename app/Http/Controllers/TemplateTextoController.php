@@ -19,7 +19,9 @@ class TemplateTextoController extends Controller
 	public function atualizar(Request $request) {
 		$texto = TemplateTexto::find($request->get('id'));
 		$texto->update($request->all());
-		$texto->propostas()->sync($request->get('mid'));
+
+		empty($request->get('mid')) ? $mid = [] : $mid = $request->get('mid');
+		$texto->propostas()->sync($mid);
 		return json_encode($texto);
 	}
 

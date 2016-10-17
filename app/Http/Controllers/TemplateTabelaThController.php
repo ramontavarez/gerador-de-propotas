@@ -13,10 +13,13 @@ class TemplateTabelaThController extends Controller
     public function salvar(Request $request)
     {
     	$tabela = TemplateTabela::find($request->get('id'));
-    	$tabela->th()->save([
-    		'nome' => $request->get('nome'),
-    		'tipo' => $request->get('tipo')
-    		]);
+    	$tabela->th()->create($request->all());
+
     	return redirect()->route('page', ['templates-tabela'])->with('success', 'Campo gravado com sucesso!');
     }
+
+    // [
+    // 		'nome' => $request->get('nome'),
+    // 		'tipo' => $request->get('tipo')
+    // 		]
 }

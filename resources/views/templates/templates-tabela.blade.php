@@ -51,19 +51,19 @@ $propostas = Proposta::where('status', 1)->get();
     <div class="modal animated fadeIn" id="modal_add_campo" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true" >
         <div class="modal-dialog">
             <div class="modal-content">   
-                <form role="form" class="form-material" method="POST" action="{{ route('salvar-th') }}">                 
+                <form role="form" class="form-material" method="POST" action="{{ route('salvar-th') }}">{!! csrf_field() !!}                 
                 <div class="modal-body">
                     <h3>Adicionar novo campo</h3>
                         
-                            <input type="hidden" id="tabela-id">
+                            <input type="hidden" id="tabela-id" name="id">
                             <div class="form-group">
-                                <input type="email" class="form-control" id="" name="nome" required>             
+                                <input type="text" class="form-control" id="" name="nome" required>             
                                 <span class="form-bar"></span>
                                 <label for="exampleInputEmail1">Título</label>
                             </div>
 
                             <div class="form-group">
-                                <select class="form-control" name="tipo" id="exampleInputSelect1">
+                                <select class="form-control" name="tipo" id="exampleInputSelect1" required>
                                     <option value="">Escolha um tipo</option>
                                     <option value="1">Texto</option>
                                     <option value="2">Select</option>
@@ -77,7 +77,7 @@ $propostas = Proposta::where('status', 1)->get();
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                    <button type="submit" class="btn btn-primary" >Salvar</button>
                 </div>
                 </form> 
             </div>
@@ -155,9 +155,9 @@ $propostas = Proposta::where('status', 1)->get();
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Status:</label>
-                                <div class="col-md-10">
+                                <div class="col-md-10 template-status-check">
                                     <label class="switch switch-small">
-                                        <input type="checkbox" checked="" id="template-status" value="0">
+                                        <input type="checkbox"  id="template-status" >
                                         <span></span>
                                     </label>
                                 </div>
@@ -173,7 +173,7 @@ $propostas = Proposta::where('status', 1)->get();
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Pertence à:</label>
                                 <div class="col-md-10">
-                                    <select multiple class="form-control select">
+                                    <select multiple class="form-control select" id="template-mid">
                                         @foreach($propostas as $proposta)
                                         <option value="{{$proposta->id}}">{{$proposta->nome}}</option>
                                         @endforeach
@@ -194,10 +194,6 @@ $propostas = Proposta::where('status', 1)->get();
                     </div>
                   
                         <div class="panel-body list-group list-group-contacts" id="lista-de-campos"> 
-
-                                                               
-                            
-                                  
                             
                             <!-- <a href="#" class="list-group-item">                                    
                                 <span class="contacts-title">Valor</span>
@@ -211,7 +207,7 @@ $propostas = Proposta::where('status', 1)->get();
                         </div>
                  
                 </div>
-                <button class="btn btn-primary pull-right">Salvar</button>
+                <button class="btn btn-primary pull-right" id="btn-salvar-tabela">Salvar</button>
             </div>
             <!-- END CONTENT FRAME BODY -->
         </div>
@@ -221,8 +217,8 @@ $propostas = Proposta::where('status', 1)->get();
 
 <script type="template/ajax" id="template-campo">
     <a href="#" class="list-group-item">                                    
-        <span class="contacts-title">Serviço</span>
-        <p><strong>Tipo:</strong> Select</p>                                    
+        <span class="contacts-title" titulo=""> </span>
+        <p tipo=""><strong>Tipo:</strong> </p>                                    
         <div class="list-group-controls">
             <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
              <button class="btn btn-danger btn-rounded"><span class="fa fa-trash"></span></button>
@@ -232,10 +228,12 @@ $propostas = Proposta::where('status', 1)->get();
 
 <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
 <script>
-    var campo = $("#template-campo").html();
-    
-    $("#lista-de-campos").append(campo);
-   function selecionarTabela(id) {
+    //template teste
+    // var campo = $("#template-campo").html();
+    // $("#lista-de-campos").append(campo);
+    //*****************************************
+
+    function selecionarTabela(id) {
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             beforeSend: function(){
@@ -252,19 +250,26 @@ $propostas = Proposta::where('status', 1)->get();
         .done(function(data){
 
             $("#carregando").hide(); 
-            // var values = [];
-            // $(data[1]).each(function(){
-            //     values.push(this.id);
-            // });
+            var values = [];
+            $(data[1]).each(function(){
+                values.push(this.id);
+            });
+
+
+            var campo = $("#template-campo").html();
+            $("#lista-de-campos").empty();
+
+            if(data[2] != ""){
+                $(data[2]).each(function(){
+                    $("#lista-de-campos").append(buildCampo(this));
+                });
+
+            }
 
             $('#template-titulo-display').text(data[0].titulo);
             $('#template-titulo').val(data[0].titulo);
             $('#tabela-id').val(data[0].id);
-            // $('#template-descricao').val(data[0].descricao);
-            // $('.note-editable').text(data[0].texto);
-            // $('.note-codable').attr('name', 'texto');
-            // $('.note-codable').text(data[0].texto);
-            // $('#template-texto-id').val(data[0].id);
+
 
             if(data[0].status == 1) {
                 $('#template-status').prop('checked', true);
@@ -273,10 +278,54 @@ $propostas = Proposta::where('status', 1)->get();
             }
 
             $('#template-status').val(data[0].status);
-            // $("#template-mid").selectpicker('val', values);
+            $("#template-mid").selectpicker('val', values);
 
         });
-   }
+    }
+
+    function buildCampo(data) {
+        var template = 
+        '<a href="#" class="list-group-item">' +                                   
+            '<span class="contacts-title">'+ data.nome +'</span>' +
+            '<p tipo=""><strong>Tipo:</strong>'+data.tipo+'</p>' +                               
+            '<div class="list-group-controls">' +
+            '<button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>' +
+            '<button class="btn btn-danger btn-rounded"><span class="fa fa-trash"></span></button>' +
+            '</div>' +                                    
+        '</a>';   
+        return template;
+
+    }
+
+    $("#btn-salvar-tabela").click(function(){
+        var checked = $('.template-status-check .switch input:checked').length;
+        var status;
+        checked ? status = 1 : status = 0;
+        var titulo = $("#template-titulo").val();
+        var mid = $('#template-mid').val();
+        var id = $('#tabela-id').val();
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            beforeSend: function(){
+                $("#carregando").show(); 
+             },
+            method: "POST",
+            url: "/atualizar-template-tabela",
+            data: {
+                _token: CSRF_TOKEN,
+                id: id,
+                titulo: titulo,
+                status: status,
+                mid: mid
+            },
+            dataType: 'JSON',
+            success: function(data){
+                $("#carregando").hide(); 
+                $('#template-titulo').val(data.titulo);
+            }
+        });
+    });
 
 
 </script>

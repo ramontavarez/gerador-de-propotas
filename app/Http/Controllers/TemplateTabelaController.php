@@ -16,6 +16,16 @@ class TemplateTabelaController extends Controller
 
 	public function getTabela(Request $request) {
 		$tabela = TemplateTabela::find($request->get('id'));
-		return json_encode([$tabela, 'lalala']);
+		return json_encode([$tabela, $tabela->propostas()->get(), $tabela->th()->get()]);
+	}
+
+	public function atualizar(Request $request) {
+		$tabela = TemplateTabela::find($request->get('id'));
+		$tabela->update($request->all());
+
+		empty($request->get('mid')) ? $mid = [] : $mid = $request->get('mid');
+		$tabela->propostas()->sync($mid);
+
+		return json_encode($tabela);
 	}
 }

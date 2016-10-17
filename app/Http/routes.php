@@ -31,6 +31,10 @@ Route::post('/salvar-template-tabela', [
     'as' => 'salvar-template-tabela', 'uses' => 'TemplateTabelaController@salvar'
 ]);
 
+Route::post('/atualizar-template-tabela', [
+    'as' => 'atualizar-template-tabela', 'uses' => 'TemplateTabelaController@atualizar'
+]);
+
 Route::post('/get-tabela', [
     'as' => 'get-tabela', 'uses' => 'TemplateTabelaController@getTabela'
 ]);

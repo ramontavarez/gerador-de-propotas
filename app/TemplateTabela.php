@@ -17,7 +17,11 @@ class TemplateTabela extends Model
     ];
 
     public function th() {
-    	return $this->belongsTo('App\TemplateTabelaTd', 'template_tabela_id');
+    	return $this->hasMany('App\TemplateTabelaTh', 'template_tabela_id');
+    }
+
+    public function propostas() {
+        return $this->belongsToMany('App\Proposta', 'template_tabela_proposta');
     }
 
 }
