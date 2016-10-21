@@ -13,7 +13,7 @@ class TemplateTabelaTh extends Model
     * @var array
     */
     protected $fillable = [
-        'nome', 'tipo', 'template_tabela_id',
+        'nome', 'tipo', 'template_tabela_id', 'order',
     ];
 
 

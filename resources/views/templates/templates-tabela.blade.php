@@ -17,24 +17,23 @@ $propostas = Proposta::where('status', 1)->get();
     <div class="modal animated fadeIn" id="modal_no_head" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true" >
         <div class="modal-dialog">
             <div class="modal-content">    
-                <form role="form" class="form-material" method="POST" action="{{ route('salvar-template-tabela') }}">                
+                <form role="form" class="form-horizontal" method="POST" action="{{ route('salvar-template-tabela') }}">                
                 <div class="modal-body">
                     <h3>Adicionar novo template</h3>
                     <p>Preencha os campos</p>
                             {!! csrf_field() !!} 
+
                             <div class="form-group">
-                                <input type="text" class="form-control" name="titulo" id="" required>                                            
-                                <span class="form-bar"></span>
                                 <label for="exampleInputEmail1">Título</label>
+                                <input type="text" class="form-control" name="titulo" id="" required>                                            
                             </div>
 
                             <div class="form-group">
+                                <label for="">Status</label>
                                 <select class="form-control" name="status">
                                     <option value="1">Ativado</option>
                                     <option value="0">Desativado</option>
                                 </select>
-                                <span class="form-bar"></span>
-                                <label for="">Status</label>
                             </div>
                             
                                                   
@@ -51,33 +50,46 @@ $propostas = Proposta::where('status', 1)->get();
     <div class="modal animated fadeIn" id="modal_add_campo" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true" >
         <div class="modal-dialog">
             <div class="modal-content">   
-                <form role="form" class="form-material" method="POST" action="{{ route('salvar-th') }}">{!! csrf_field() !!}                 
+                <!-- <form role="form" class="form-material" method="POST" action="{{ route('salvar-th') }}">{!! csrf_field() !!}                  -->
+                <form role="form" class="form-horizontal" id="add-campo-form">
+                {!! csrf_field() !!}                 
+
                 <div class="modal-body">
                     <h3>Adicionar novo campo</h3>
                         
                             <input type="hidden" id="tabela-id" name="id">
+
                             <div class="form-group">
-                                <input type="text" class="form-control" id="" name="nome" required>             
-                                <span class="form-bar"></span>
-                                <label for="exampleInputEmail1">Título</label>
+                                <label class="control-label">Título:</label>
+                                <input type="text" class="form-control" id="campo-nome" name="nome" required> 
                             </div>
 
                             <div class="form-group">
-                                <select class="form-control" name="tipo" id="exampleInputSelect1" required>
+                                <label class="control-label">Tipo</label>
+                                <select class="form-control" name="tipo" id="campo-select" required>
                                     <option value="">Escolha um tipo</option>
                                     <option value="1">Texto</option>
                                     <option value="2">Select</option>
                                     <option value="3">Moeda</option>
                                 </select>
-                                <span class="form-bar"></span>
-                                <label for="exampleInputSelect1">Tipo</label>
+                            </div>
+
+                            <div class="form-group" id="campo-opcoes">
+                                <label class="control-label">Opções</label>
+                                <input type="text" class="tagsinput" name="opcoes" value=""/>
+                            </div> 
+
+                            <div class="form-group">
+                                <label class="control-label">Ordem</label>
+                                <input type="number" class="form-control" id="" name="order" required>
                             </div>
 
                                                     
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" >Salvar</button>
+                    <button type="button" class="btn btn-primary" 
+                    data-dismiss="modal" id="btn-salvar-campo">Salvar</button>
                 </div>
                 </form> 
             </div>
@@ -130,10 +142,15 @@ $propostas = Proposta::where('status', 1)->get();
                 <div class="panel-body list-group list-group-contacts"">
                     
                     @foreach($tabelas as $tabela)
-                    <button class="list-group-item" onclick="selecionarTabela({{$tabela->id}})">                                   
+                    <a href="#" class="list-group-item" onclick="selecionarTabela({{$tabela->id}})">                                   
                         <span class="contacts-title" >{{$tabela->titulo}}</span>
-                        <p>Vazio</p>                                    
-                    </button>
+                        <p>Vazio</p>
+                            <div class="list-group-controls">
+                                 <button class="btn btn-danger btn-rounded btn-trash-tabela"><span class="fa fa-trash"></span></button>
+                            </div>                                       
+                    </a>
+
+
                     @endforeach
 
                    <!--  <a href="#" class="list-group-item">
@@ -194,15 +211,7 @@ $propostas = Proposta::where('status', 1)->get();
                     </div>
                   
                         <div class="panel-body list-group list-group-contacts" id="lista-de-campos"> 
-                            
-                            <!-- <a href="#" class="list-group-item">                                    
-                                <span class="contacts-title">Valor</span>
-                                <p><strong>Tipo:</strong> Valor($)</p> 
-                                <div class="list-group-controls">
-                                    <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
-                                    <button class="btn btn-danger btn-rounded"><span class="fa fa-trash"></span></button>
-                                </div>                                    
-                            </a> -->
+                            <!-- Lista de campos -->
                               
                         </div>
                  
@@ -227,13 +236,33 @@ $propostas = Proposta::where('status', 1)->get();
 </script>   
 
 <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
+<script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+
 <script>
     //template teste
     // var campo = $("#template-campo").html();
     // $("#lista-de-campos").append(campo);
     //*****************************************
+    
+    //Lidando com o tipo select no momento de criar o campo
+    $("#campo-opcoes").hide();
+
+    $("#campo-select").change(function(){
+        if($(this).val() == 2) {
+            $("#campo-opcoes").show();
+        } else {
+            $("#campo-opcoes").hide();
+        }
+    });
+    //*****************************************************
+    var clickTrash = 0;
+    $('.btn-trash-tabela').click(function(event) {
+        customAlert();
+        return false;
+    });
 
     function selecionarTabela(id) {
+
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             beforeSend: function(){
@@ -289,7 +318,7 @@ $propostas = Proposta::where('status', 1)->get();
             '<span class="contacts-title">'+ data.nome +'</span>' +
             '<p tipo=""><strong>Tipo:</strong>'+data.tipo+'</p>' +                               
             '<div class="list-group-controls">' +
-            '<button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>' +
+            '<button class="btn btn-primary btn-rounded" style="margin-right:5px"><span class="fa fa-pencil"></span></button>' +
             '<button class="btn btn-danger btn-rounded"><span class="fa fa-trash"></span></button>' +
             '</div>' +                                    
         '</a>';   
@@ -323,6 +352,43 @@ $propostas = Proposta::where('status', 1)->get();
             success: function(data){
                 $("#carregando").hide(); 
                 $('#template-titulo').val(data.titulo);
+            }
+        });
+    });
+
+    $("#btn-salvar-campo").click(function(){
+        var form = $("#add-campo-form");
+        var id = $(form).find('[name="id"]').val();
+        var nome = $(form).find('[name="nome"]').val();
+        var tipo = $(form).find('[name="tipo"]').val();
+        var ordem = $(form).find('[name="order"]').val();
+        var opcoes = $(form).find('[name="opcoes"]').val();
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            beforeSend: function(){
+                $("#carregando").show(); 
+             },
+            method: "POST",
+            url: "/salvar-th",
+            data: {
+                _token: CSRF_TOKEN,
+                id: id,
+                nome: nome,
+                tipo: tipo,
+                order: ordem,
+                opcoes: opcoes
+            },
+            dataType: 'JSON',
+            success: function(data){
+                $("#carregando").hide(); 
+                $('#template-titulo').val(data.titulo);
+
+                if(data != ""){
+                    $(data).each(function(){
+                        $("#lista-de-campos").append(buildCampo(this));
+                    });
+                }
             }
         });
     });

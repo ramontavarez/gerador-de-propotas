@@ -12,14 +12,20 @@ class TemplateTabelaThController extends Controller
 {
     public function salvar(Request $request)
     {
-    	$tabela = TemplateTabela::find($request->get('id'));
-    	$tabela->th()->create($request->all());
 
-    	return redirect()->route('page', ['templates-tabela'])->with('success', 'Campo gravado com sucesso!');
+    	$tabela = TemplateTabela::find($request->get('id'));
+    	$th = $tabela->th()->create($request->all());
+
+    	if(!empty($request->get('opcoes'))) {
+            $opcoes = explode(',' , $request->get('opcoes'));
+            foreach($opcoes as $value) {
+                $td[] = $th->td()->create(['valor' => $value]);
+            }
+
+        }
+
+        return json_encode($th);
     }
 
-    // [
-    // 		'nome' => $request->get('nome'),
-    // 		'tipo' => $request->get('tipo')
-    // 		]
+
 }

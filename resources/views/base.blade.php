@@ -231,6 +231,36 @@ $propostas = Proposta::where('status', 1)->get();
 
         <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/actions.js') }}"></script>
+
+        <script type="text/javascript">
+
+            function customAlert() {
+                var customAlert =
+                '<div class="message-box message-box-danger animated fadeIn open" id="custom-alert">' +
+                        '<div class="mb-container">' +
+                            '<div class="mb-middle">' +
+                                '<div class="mb-title"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>' + 'Carregando</div>' +
+                                '<div class="mb-content">' +
+                                    '<p></p>' +
+                                '</div>' +
+                                '<div class="mb-footer">'+
+                                '<button class="btn btn-default btn-lg pull-right mb-control-close">'+
+                                'Close</button>'+
+                                '</div>'+
+                            '</div>' +
+                        '</div>' +
+                    '</div>'; 
+
+                    $('body').append(customAlert);
+                    return customAlert;
+            }
+
+            $('body').on('click', '#custom-alert',function(){
+                $(this).removeClass('open');
+            }); 
+            
+
+        </script>
         <!-- END TEMPLATE -->
         @yield('scripts')
 

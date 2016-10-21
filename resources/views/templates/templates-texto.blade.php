@@ -17,33 +17,34 @@ $templates = TemplateTexto::get();
     <div class="modal animated fadeIn" id="modal_no_head" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true" >
         <div class="modal-dialog">
             <div class="modal-content">   
-                <form role="form" class="form-material" method="POST" action="{{ route('salvar-template-texto') }}">    
+                <form role="form" class="form-horizontal" method="POST" action="{{ route('salvar-template-texto') }}">    
                 {!! csrf_field() !!}             
                 <div class="modal-body">
                     <h3>Adicionar novo template</h3>
                     <p>Preencha os campos</p>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="titulo" required>                                            
-                                <span class="form-bar"></span>
                                 <label for="">Título</label>
+                                <input type="text" class="form-control" name="titulo" required>                                
                             </div>
-                            <div class="form-group">  
-                                <input type="text" class="form-control" name="descricao" placeholder="">                                            
-                                <span class="form-bar"></span>
-                                <label for="">Descrição</label>        
+
+                            <div class="form-group"> 
+                                 <label for="">Descrição</label>   
+                                <input type="text" class="form-control" name="descricao" placeholder="">
+                                     
                             </div>
+
                             <div class="form-group">
+                                <label for="">Status</label>
                                 <select class="form-control" name="status">
                                     <option value="1">Ativado</option>
                                     <option value="0">Desativado</option>
-                                </select>
-                                <span class="form-bar"></span>
-                                <label for="">Status</label>
+                                </select> 
                             </div>
+
                             <div class="form-group">
-                                <textarea class="form-control" rows="5" name="texto" style="resize:none"></textarea>                                            
-                                <span class="form-bar"></span>
                                 <label for="">Textarea</label>
+                                <textarea class="form-control" rows="5" name="texto" style="resize:none"></textarea>                                            
+                                
                             </div>
                                                     
                 </div>
@@ -138,7 +139,7 @@ $templates = TemplateTexto::get();
             <!-- END CONTENT FRAME LEFT -->
             
             <!-- START CONTENT FRAME BODY -->
-            <div class="content-frame-body">
+            <div class="content-frame-body" style="display: none;">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3 id="template-titulo-display">Título do template</h3>
@@ -205,7 +206,7 @@ $templates = TemplateTexto::get();
 @section('scripts')
 <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
 <script>
-        $('.content-frame-body').hide();
+        
         $("#template-mid").selectpicker();
 
         $("#template-mid").on("change", function(){
