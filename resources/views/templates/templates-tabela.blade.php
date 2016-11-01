@@ -1,101 +1,19 @@
+<?php
+$propostas = getPropostasAtivas();
+$tabelas = getTabelas();
+?>
+
 @extends('base')
     @section('content')
     <ul class="breadcrumb">
         <!-- <li><a href="/">Propostas</a></li>                     -->
         <li class="active">Templates - Tabela</li>
     </ul>
-<?php
-use App\TemplateTabela;
-use App\TemplateTabelaTh;
-use App\Proposta;
 
-$tabelas = TemplateTabela::get();
-$propostas = Proposta::where('status', 1)->get();
-?>
-
-<!-- MODAL NO HEAD -->
-    <div class="modal animated fadeIn" id="modal_no_head" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true" >
-        <div class="modal-dialog">
-            <div class="modal-content">    
-                <form role="form" class="form-horizontal" method="POST" action="{{ route('salvar-template-tabela') }}">                
-                <div class="modal-body">
-                    <h3>Adicionar novo template</h3>
-                    <p>Preencha os campos</p>
-                            {!! csrf_field() !!} 
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Título</label>
-                                <input type="text" class="form-control" name="titulo" id="" required>                                            
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">Status</label>
-                                <select class="form-control" name="status">
-                                    <option value="1">Ativado</option>
-                                    <option value="0">Desativado</option>
-                                </select>
-                            </div>
-                            
-                                                  
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" >Salvar</button>
-                </div>
-                </form>  
-            </div>
-        </div>
-    </div> 
-
-    <div class="modal animated fadeIn" id="modal_add_campo" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true" >
-        <div class="modal-dialog">
-            <div class="modal-content">   
-                <!-- <form role="form" class="form-material" method="POST" action="{{ route('salvar-th') }}">{!! csrf_field() !!}                  -->
-                <form role="form" class="form-horizontal" id="add-campo-form">
-                {!! csrf_field() !!}                 
-
-                <div class="modal-body">
-                    <h3>Adicionar novo campo</h3>
-                        
-                            <input type="hidden" id="tabela-id" name="id">
-
-                            <div class="form-group">
-                                <label class="control-label">Título:</label>
-                                <input type="text" class="form-control" id="campo-nome" name="nome" required> 
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label">Tipo</label>
-                                <select class="form-control" name="tipo" id="campo-select" required>
-                                    <option value="">Escolha um tipo</option>
-                                    <option value="1">Texto</option>
-                                    <option value="2">Select</option>
-                                    <option value="3">Moeda</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group" id="campo-opcoes">
-                                <label class="control-label">Opções</label>
-                                <input type="text" class="tagsinput" name="opcoes" value=""/>
-                            </div> 
-
-                            <div class="form-group">
-                                <label class="control-label">Ordem</label>
-                                <input type="number" class="form-control" id="" name="order" required>
-                            </div>
-
-                                                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" 
-                    data-dismiss="modal" id="btn-salvar-campo">Salvar</button>
-                </div>
-                </form> 
-            </div>
-        </div>
-    </div> 
-
+<!-- MODALS-->
+    @include('components.tabela.modal-add-tabela')
+    @include('components.tabela.modal-add-campo')
+<!-- END MODALS -->
 
 <!-- START CONTENT FRAME -->
         <div class="content-frame">
@@ -142,21 +60,26 @@ $propostas = Proposta::where('status', 1)->get();
                 <div class="panel-body list-group list-group-contacts"">
                     
                     @foreach($tabelas as $tabela)
-                    <a href="#" class="list-group-item" onclick="selecionarTabela({{$tabela->id}})">                                   
+                    <a style="cursor:pointer" class="list-group-item" onclick="selecionarTabela({{$tabela->id}})">                                   
                         <span class="contacts-title" >{{$tabela->titulo}}</span>
-                        <p>Vazio</p>
+                        <p>
+                        @foreach($tabela->propostas as $key => $propostaTabela)
+                            @if($key != count($tabela->propostas) - 1)
+                            {{$propostaTabela->nome .", "}}
+                            @else
+                            {{$propostaTabela->nome}}
+                            @endif
+                        @endforeach
+                        </p>
                             <div class="list-group-controls">
-                                 <button class="btn btn-danger btn-rounded btn-trash-tabela"><span class="fa fa-trash"></span></button>
+                                 <button class="btn btn-danger btn-rounded btn-trash-tabela" tabela-id="{{$tabela->id}}"><span class="fa fa-trash"></span></button>
                             </div>                                       
                     </a>
 
 
                     @endforeach
 
-                   <!--  <a href="#" class="list-group-item">
-                        <span class="contacts-title" >Produtos</span>
-                        <p>Proposta de Venda</p>                                   
-                    </a>    -->
+                
     
                     </div>
                 </div>
@@ -164,7 +87,7 @@ $propostas = Proposta::where('status', 1)->get();
             <!-- END CONTENT FRAME LEFT -->
             
             <!-- START CONTENT FRAME BODY -->
-            <div class="content-frame-body">
+            <div class="content-frame-body" style="display:none">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3 id="template-titulo-display">Título do template</h3>
@@ -257,7 +180,6 @@ $propostas = Proposta::where('status', 1)->get();
     //*****************************************************
     var clickTrash = 0;
     $('.btn-trash-tabela').click(function(event) {
-        customAlert();
         return false;
     });
 
@@ -277,7 +199,8 @@ $propostas = Proposta::where('status', 1)->get();
             dataType: 'JSON'
         })
         .done(function(data){
-
+            $('.content-frame-body').hide();
+            $('.content-frame-body').fadeIn(200);
             $("#carregando").hide(); 
             var values = [];
             $(data[1]).each(function(){
@@ -316,7 +239,7 @@ $propostas = Proposta::where('status', 1)->get();
         var template = 
         '<a href="#" class="list-group-item">' +                                   
             '<span class="contacts-title">'+ data.nome +'</span>' +
-            '<p tipo=""><strong>Tipo:</strong>'+data.tipo+'</p>' +                               
+            '<p tipo=""><strong>Tipo:</strong> '+ translateTipoCampo(data.tipo)+'</p>' +                               
             '<div class="list-group-controls">' +
             '<button class="btn btn-primary btn-rounded" style="margin-right:5px"><span class="fa fa-pencil"></span></button>' +
             '<button class="btn btn-danger btn-rounded"><span class="fa fa-trash"></span></button>' +
@@ -393,6 +316,26 @@ $propostas = Proposta::where('status', 1)->get();
         });
     });
 
+    function translateTipoCampo(valor) {
+        switch(valor) {
+            case 1:
+                return 'Texto';
+                break;
+            case 2:
+                return 'Select';
+                break;
+            case 3:
+                return 'Moeda';
+                break;
+            default:
+                return 'Indefinido';
+                break;
+            }
+    }
+
+    $("#lista-de-campos").on('click', '.list-group-item', function(){
+        $('#modal_no_head').modal();
+    });
 
 </script>
 @endsection

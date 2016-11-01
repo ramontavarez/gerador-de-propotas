@@ -17,13 +17,13 @@ class PropostaTableSeeder extends Seeder
        	DB::table('propostas')->insert([
             'status' => 1,
             'nome' => 'Proposta de Serviço',
-            'user_id' => 1,
+            'user_id' => 2,
         ]);
 
         DB::table('propostas')->insert([
             'status' => 1,
             'nome' => 'Proposta de Venda',
-            'user_id' => 1,
+            'user_id' => 2,
         ]);
 
          Model::reguard();

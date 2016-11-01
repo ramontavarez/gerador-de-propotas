@@ -1,7 +1,5 @@
 <?php 
-use App\Proposta;
-
-$propostas = Proposta::where('status', 1)->get();
+$propostas = getPropostasAtivas();
 
 ?>
 <!DOCTYPE html>
@@ -21,6 +19,7 @@ $propostas = Proposta::where('status', 1)->get();
         <link rel="stylesheet" type="text/css" id="theme" href="{{ asset('css/animate/animate.min.css')}}"/>
 		<link rel="stylesheet" type="text/css" id="theme" href="{{ asset('css/app.css') }}"/>
         <link rel="stylesheet" type="text/css" id="theme" href="{{ asset('css/proposta.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/5.3.5/sweetalert2.min.css">
         <!-- EOF CSS INCLUDE -->
 
 
@@ -215,6 +214,7 @@ $propostas = Proposta::where('status', 1)->get();
         <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-datepicker.js') }}"></script>
         <!-- END PLUGINS -->
         <script type="text/javascript" src="{{ asset('js/plugins/summernote/summernote.js') }}"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/sweetalert2/5.3.5/sweetalert2.min.js"></script>
         <!-- ANGULAR -->
 <!--    <script type="text/javascript" src="js/plugins/angular/angular.min.js"></script>
         <script type="text/javascript" src="js/plugins/angular/angular-route.min.js"></script>
@@ -234,18 +234,19 @@ $propostas = Proposta::where('status', 1)->get();
 
         <script type="text/javascript">
 
-            function customAlert() {
+            //chama o alerta passando parametros
+            function customAlert(type, message, buttonName) {
                 var customAlert =
-                '<div class="message-box message-box-danger animated fadeIn open" id="custom-alert">' +
+                '<div class="message-box message-box-'+type+' animated fadeIn open" id="custom-alert">' +
                         '<div class="mb-container">' +
                             '<div class="mb-middle">' +
-                                '<div class="mb-title"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>' + 'Carregando</div>' +
+                                '<div class="mb-title"><i class="fa fa-exclamation-circle fa-3x fa-fw"></i>' + message +'</div>' +
                                 '<div class="mb-content">' +
                                     '<p></p>' +
                                 '</div>' +
                                 '<div class="mb-footer">'+
                                 '<button class="btn btn-default btn-lg pull-right mb-control-close">'+
-                                'Close</button>'+
+                                buttonName+'</button>'+
                                 '</div>'+
                             '</div>' +
                         '</div>' +
@@ -255,8 +256,10 @@ $propostas = Proposta::where('status', 1)->get();
                     return customAlert;
             }
 
-            $('body').on('click', '#custom-alert',function(){
-                $(this).removeClass('open');
+            $('body').on('click', '.mb-control-close',function(){
+                var alert = $(this).closest('#custom-alert');
+                $(alert).removeClass('open');
+                console.log(alert);
             }); 
             
 

@@ -23,4 +23,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function propostas() {
+        return $this->hasMany('App\Proposta', 'user_id');
+        
+    }
 }

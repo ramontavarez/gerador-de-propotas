@@ -11,41 +11,58 @@
 |
 */
 
-Route::get('/gerar-proposta/{id}', [
-    'as' => 'gerar-proposta', 'uses' => 'PropostaController@index'
+Route::get('/login', function(){
+	return view('login.login');
+});
+
+Route::post('/autenticar', [
+	'as' => 'autenticar', 'uses' => 'AuthController@autenticar'
 ]);
 
-Route::post('/salvar-template-texto', [
-    'as' => 'salvar-template-texto', 'uses' => 'TemplateTextoController@salvar'
-]);
+Route::group(['middleware' => 'auth'], function(){
 
-Route::post('/atualizar-template-texto', [
-    'as' => 'atualizar-template-texto', 'uses' => 'TemplateTextoController@atualizar'
-]);
+	Route::get('/gerar-proposta/{id}', [
+	    'as' => 'gerar-proposta', 'uses' => 'PropostaController@index'
+	]);
 
-Route::post('/get-propostas-from-texto', [
-    'as' => 'get-propostas-from-texto', 'uses' => 'TemplateTextoController@getPropostas'
-]);
+	Route::post('/salvar-template-texto', [
+	    'as' => 'salvar-template-texto', 'uses' => 'TemplateTextoController@salvar'
+	]);
 
-Route::post('/salvar-template-tabela', [
-    'as' => 'salvar-template-tabela', 'uses' => 'TemplateTabelaController@salvar'
-]);
+	Route::post('/atualizar-template-texto', [
+	    'as' => 'atualizar-template-texto', 'uses' => 'TemplateTextoController@atualizar'
+	]);
 
-Route::post('/atualizar-template-tabela', [
-    'as' => 'atualizar-template-tabela', 'uses' => 'TemplateTabelaController@atualizar'
-]);
+	Route::post('/get-propostas-from-texto', [
+	    'as' => 'get-propostas-from-texto', 'uses' => 'TemplateTextoController@getPropostas'
+	]);
 
-Route::post('/get-tabela', [
-    'as' => 'get-tabela', 'uses' => 'TemplateTabelaController@getTabela'
-]);
+	Route::post('/salvar-template-tabela', [
+	    'as' => 'salvar-template-tabela', 'uses' => 'TemplateTabelaController@salvar'
+	]);
 
-Route::post('/salvar-th', [
-    'as' => 'salvar-th', 'uses' => 'TemplateTabelaThController@salvar'
-]);
+	Route::post('/atualizar-template-tabela', [
+	    'as' => 'atualizar-template-tabela', 'uses' => 'TemplateTabelaController@atualizar'
+	]);
 
-Route::get('/{name?}', [
-    'as' => 'page', 'uses' => 'PageController@showPage'
-]);
+	Route::post('/get-tabela', [
+	    'as' => 'get-tabela', 'uses' => 'TemplateTabelaController@getTabela'
+	]);
+
+	Route::post('/delete-tabela', [
+	    'as' => 'delete-tabela', 'uses' => 'TemplateTabelaController@deleteTabela'
+	]);
+
+	Route::post('/salvar-th', [
+	    'as' => 'salvar-th', 'uses' => 'TemplateTabelaThController@salvar'
+	]);
+
+	Route::get('/{name?}', [
+	    'as' => 'page', 'uses' => 'PageController@showPage'
+	]);
+});
+
+
 
 // Route::get('/', function () {
 //     return view('home');

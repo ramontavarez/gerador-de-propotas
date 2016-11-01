@@ -20,4 +20,9 @@ class Proposta extends Model
     {
         return $this->belongsToMany('App\TemplateTexto', 'template_texto_proposta');
     }
+
+    public function tabelas() 
+    {
+        return $this->belongsToMany('App\TemplateTabela', 'template_tabela_proposta');
+    }
 }
