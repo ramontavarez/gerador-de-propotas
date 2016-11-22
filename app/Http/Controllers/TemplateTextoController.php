@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\TemplateTexto;
 use App\MidTextoProposta;
+use Auth;
 
 class TemplateTextoController extends Controller
 {
     public function salvar(Request $request) {
+    	$request->merge(['user_id' => Auth::user()->id]);
     	TemplateTexto::create($request->all());
     	return redirect()->route('page', ['templates-texto'])->with('success', 'Texto gravado com sucesso!');
     	// return view('templates.templates-texto')->with('newsletter', 'Obrigado por se cadastrar!');

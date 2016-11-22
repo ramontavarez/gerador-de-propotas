@@ -49,6 +49,10 @@ Route::group(['middleware' => 'auth'], function(){
 	    'as' => 'get-tabela', 'uses' => 'TemplateTabelaController@getTabela'
 	]);
 
+	Route::get('/get-th', [
+	    'as' => 'get-th', 'uses' => 'TemplateTabelaThController@getTh'
+	]);
+
 	Route::post('/delete-tabela', [
 	    'as' => 'delete-tabela', 'uses' => 'TemplateTabelaController@deleteTabela'
 	]);

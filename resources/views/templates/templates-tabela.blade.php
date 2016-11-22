@@ -13,41 +13,26 @@ $tabelas = getTabelas();
 <!-- MODALS-->
     @include('components.tabela.modal-add-tabela')
     @include('components.tabela.modal-add-campo')
+    @include('components.tabela.modal-edit-campo')
 <!-- END MODALS -->
+
+@include('components.alert.success')
 
 <!-- START CONTENT FRAME -->
         <div class="content-frame">
-
-        <div class="message-box message-box-success animated fadeIn 
-            @if(session()->has('success'))
-            open
-            @endif" id="message-box-success">
+    
+        <!-- START CONTENT FRAME TOP -->
+        <div class="content-frame-top">                        
+            <div class="page-title">                    
+                <h2><span class="fa fa-arrow-circle-o-left"></span> Templates - tabela</h2>
+            </div>                                      
+            <div class="pull-right">
+                <button class="btn btn-default content-frame-left-toggle"><span class="fa fa-bars"></span></button>
+            </div>                        
+        </div>
+        <!-- END CONTENT FRAME TOP -->
             
-                <div class="mb-container">
-                    <div class="mb-middle">
-                        <div class="mb-title"><span class="fa fa-check"></span> Success</div>
-                        <div class="mb-content">
-                            <p>{{ session()->get('success') }}</p>
-                        </div>
-                        <div class="mb-footer">
-                            <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- START CONTENT FRAME TOP -->
-            <div class="content-frame-top">                        
-                <div class="page-title">                    
-                    <h2><span class="fa fa-arrow-circle-o-left"></span> Templates - tabela</h2>
-                </div>                                      
-                <div class="pull-right">
-                    <button class="btn btn-default content-frame-left-toggle"><span class="fa fa-bars"></span></button>
-                </div>                        
-            </div>
-            <!-- END CONTENT FRAME TOP -->
-            
-            <!-- START CONTENT FRAME LEFT -->
+        <!-- START CONTENT FRAME LEFT -->
         <div class="content-frame-left">
             <div class="panel panel-default">
                 <div class="panel-heading" style="background:#fff;">
@@ -147,25 +132,11 @@ $tabelas = getTabelas();
 
 @section('scripts')
 
-<script type="template/ajax" id="template-campo">
-    <a href="#" class="list-group-item">                                    
-        <span class="contacts-title" titulo=""> </span>
-        <p tipo=""><strong>Tipo:</strong> </p>                                    
-        <div class="list-group-controls">
-            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
-             <button class="btn btn-danger btn-rounded"><span class="fa fa-trash"></span></button>
-        </div>                                    
-    </a>    
-</script>   
-
 <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
 <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
 
 <script>
-    //template teste
-    // var campo = $("#template-campo").html();
-    // $("#lista-de-campos").append(campo);
-    //*****************************************
+
     
     //Lidando com o tipo select no momento de criar o campo
     $("#campo-opcoes").hide();
@@ -208,7 +179,7 @@ $tabelas = getTabelas();
             });
 
 
-            var campo = $("#template-campo").html();
+            // var campo = $("#template-campo").html();
             $("#lista-de-campos").empty();
 
             if(data[2] != ""){
@@ -237,7 +208,7 @@ $tabelas = getTabelas();
 
     function buildCampo(data) {
         var template = 
-        '<a href="#" class="list-group-item">' +                                   
+        '<a href="#" id='+data.id+' class="list-group-item">' +                                   
             '<span class="contacts-title">'+ data.nome +'</span>' +
             '<p tipo=""><strong>Tipo:</strong> '+ translateTipoCampo(data.tipo)+'</p>' +                               
             '<div class="list-group-controls">' +
@@ -334,7 +305,19 @@ $tabelas = getTabelas();
     }
 
     $("#lista-de-campos").on('click', '.list-group-item', function(){
-        $('#modal_no_head').modal();
+        var campoID = $(this).attr('id');
+        $.ajax({
+            url: '/get-th',
+            method: "GET",
+            data: {id: campoID},
+            success: function(response) {
+                $('#modal_edit_campo').modal();
+                $('#edit-campo-form').find('[name="nome"]').val(response.nome);
+                $('#edit-campo-form').find('[name="tipo"]').val(response.tipo);
+                $('#edit-campo-form').find('[name="order"]').val(response.order);
+            }
+        });
+        
     });
 
 </script>

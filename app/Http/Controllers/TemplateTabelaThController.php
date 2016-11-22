@@ -27,5 +27,10 @@ class TemplateTabelaThController extends Controller
         return json_encode($th);
     }
 
+    public function getTh(Request $request) 
+    {
+        return TemplateTabelaTh::whereId($request->id)->first();
+    }
+
 
 }

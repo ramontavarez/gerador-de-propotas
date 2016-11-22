@@ -14,7 +14,7 @@ class TemplateTexto extends Model
     * @var array
     */
     protected $fillable = [
-        'status', 'titulo', 'descricao', 'texto'
+        'status', 'titulo', 'descricao', 'texto', 'user_id'
     ];
 
     public function propostas()
