@@ -61,6 +61,10 @@ Route::group(['middleware' => 'auth'], function(){
 	    'as' => 'salvar-th', 'uses' => 'TemplateTabelaThController@salvar'
 	]);
 
+	Route::post('/atualizar-th', [
+	    'as' => 'atualizar-th', 'uses' => 'TemplateTabelaThController@atualizar'
+	]);
+
 	Route::get('/{name?}', [
 	    'as' => 'page', 'uses' => 'PageController@showPage'
 	]);

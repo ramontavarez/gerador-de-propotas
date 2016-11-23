@@ -209,8 +209,8 @@ $tabelas = getTabelas();
     function buildCampo(data) {
         var template = 
         '<a href="#" id='+data.id+' class="list-group-item">' +                                   
-            '<span class="contacts-title">'+ data.nome +'</span>' +
-            '<p tipo=""><strong>Tipo:</strong> '+ translateTipoCampo(data.tipo)+'</p>' +                               
+            '<span class="contacts-title" data-titulo>'+ data.nome +'</span>' +
+            '<p tipo=""><strong>Tipo:</strong> <span data-tipo>'+ translateTipoCampo(data.tipo)+'</span></p>' +                               
             '<div class="list-group-controls">' +
             '<button class="btn btn-primary btn-rounded" style="margin-right:5px"><span class="fa fa-pencil"></span></button>' +
             '<button class="btn btn-danger btn-rounded"><span class="fa fa-trash"></span></button>' +
@@ -287,6 +287,43 @@ $tabelas = getTabelas();
         });
     });
 
+    $("#btn-atualizar-campo").click(function(){
+        var form = $("#edit-campo-form");
+        var id = $(form).find('[name="id"]').val();
+        var nome = $(form).find('[name="nome"]').val();
+        var tipo = $(form).find('[name="tipo"]').val();
+        var ordem = $(form).find('[name="order"]').val();
+        var opcoes = $(form).find('[name="opcoes"]').val();
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            beforeSend: function(){
+                $("#carregando").show(); 
+             },
+            method: "POST",
+            url: "/atualizar-th",
+            data: {
+                _token: CSRF_TOKEN,
+                id: id,
+                nome: nome,
+                tipo: tipo,
+                order: ordem,
+                opcoes: opcoes
+            },
+            dataType: 'JSON',
+            success: function(data){
+                $("#carregando").hide(); 
+                // $('#template-titulo').val(data.titulo);
+
+                if(data != ""){
+                    console.log(data);
+                    $(campoClicado).find('[data-titulo]').text('').text(data.nome);
+                    $(campoClicado).find('[data-tipo]').text('').text(translateTipoCampo(data.tipo));
+                }   
+            }
+        });
+    });
+
     function translateTipoCampo(valor) {
         switch(valor) {
             case 1:
@@ -304,14 +341,18 @@ $tabelas = getTabelas();
             }
     }
 
+    var campoClicado;
     $("#lista-de-campos").on('click', '.list-group-item', function(){
         var campoID = $(this).attr('id');
+        campoClicado = $(this);
+        
         $.ajax({
             url: '/get-th',
             method: "GET",
             data: {id: campoID},
             success: function(response) {
                 $('#modal_edit_campo').modal();
+                $('#edit-campo-form').find('[name="id"]').val(response.id);
                 $('#edit-campo-form').find('[name="nome"]').val(response.nome);
                 $('#edit-campo-form').find('[name="tipo"]').val(response.tipo);
                 $('#edit-campo-form').find('[name="order"]').val(response.order);
