@@ -88,7 +88,7 @@
                                         @foreach($templatesTexto as $key => $template)
                                            
                                         <div class="tab-pane  @if($key == 0) active @endif" id="{{$template->id}}">
-                                            <textarea class="summernote1"></textarea>
+                                            <textarea class="summernote1">{{$template->texto}}</textarea>
                                         </div>
                                         @endforeach
 
@@ -154,7 +154,7 @@
 
                             <div class="panel panel-default">
                                 <div class="panel-heading" style="background:#fff">
-                                    <h3 class="panel-title"><strong>Serviços</strong></h3>
+                                    <h3 class="panel-title"><strong>Itens</strong></h3>
                                     <ul class="panel-controls">
 
 
@@ -166,7 +166,7 @@
 
                                             <thead>
                                             <tr>
-                                            <th width='250'>Serviço</th><th width="50">Valor</th>
+                                            <th width='250'>Item</th><th width="50">Valor</th>
                                             </tr>
                                             </thead>
 

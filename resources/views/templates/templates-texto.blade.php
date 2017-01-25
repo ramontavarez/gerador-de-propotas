@@ -121,7 +121,7 @@ $templates = TemplateTexto::get();
                     <div class="panel-body list-group list-group-contacts"">
                         @foreach($templates as $template)
                         <button 
-                        onclick="selecionarTemplate({{$template}})" 
+                        onclick="selecionarTemplate({{$template->id}})" 
                         class="list-group-item">                  
                             <span class="contacts-title">{{$template->titulo}}</span>
                             <p>
@@ -223,25 +223,9 @@ $templates = TemplateTexto::get();
         $(".note-editor").css('border', 0);
         $(".note-statusbar").hide();
 
-    function selecionarTemplate(template) {
+    function selecionarTemplate(templateID) {
         $('.content-frame-body').fadeIn();
-        getPropostas(template.id);
-
-        // $('#template-titulo-display').text(template.titulo);
-        // $('#template-titulo').val(template.titulo);
-        // $('#template-descricao').val(template.descricao);
-        // $('.note-editable').text(template.texto);
-        // $('.note-codable').attr('name', 'texto');
-        // $('.note-codable').text(template.texto);
-        // $('#template-texto-id').val(template.id);
-
-        // if(template.status == 1) {
-        //     $('#template-status').prop('checked', true);
-        // } else {
-        //     $('#template-status').prop('checked', false);
-        // }
-
-        // $('#template-status').val(template.status);
+        getPropostas(templateID);
 
     }
 
@@ -260,7 +244,7 @@ $templates = TemplateTexto::get();
             dataType: 'JSON'
         })
         .done(function(data){
-
+            console.log(data);
             $("#carregando").hide(); 
             var values = [];
             $(data[1]).each(function(){
@@ -269,9 +253,10 @@ $templates = TemplateTexto::get();
             $('#template-titulo-display').text(data[0].titulo);
             $('#template-titulo').val(data[0].titulo);
             $('#template-descricao').val(data[0].descricao);
-            $('.note-editable').text(data[0].texto);
+            var texto = data[0].texto.replace(/<\/?[^>]+(>|$)/g, "");
+            $('.note-editable').text(texto);
             $('.note-codable').attr('name', 'texto');
-            $('.note-codable').text(data[0].texto);
+            // $('.note-codable').text(data[0].texto);
             $('#template-texto-id').val(data[0].id);
 
             if(data[0].status == 1) {

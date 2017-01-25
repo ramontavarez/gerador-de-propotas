@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#target, #target2 {
+			width: 200px;
+			height: 200px;
+			margin: 10px 10px;
+			display: inline-block;
+			float: left;
+			background: red;
+			color:#fff;
+		}
+
+		#target2 {
+			background:blue;
+		}
+
+		#target div {
+			margin:5px;
+		}
+
+		.text {
+			font-size:12px;
+		}
+
+		.title {
+			border-bottom: 1px solid #fff;
+		}
+
+		.footer {
+			background: grey;
+		}
+	</style>
+</head>
+<body>
+	<div class='pai'>
+		<div id="target" piloti-repeat=5 random>
+			<div class='title' pi-el>title</div>
+			<div class='text' pi-el>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+			<div class='footer' pi-el>footer</div>
+		</div>
+	</div>	
+
+	<div class='pai'>
+		<div id="target2" piloti-repeat=3>
+			<div class='title' pi-el>title</div>
+			<div class='text' pi-el>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+			<div class='footer' pi-el>footer</div>
+		</div>
+	</div>	
+
+	<script 
+	src="https://code.jquery.com/jquery-3.1.1.min.js"
+  	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  	crossorigin="anonymous">
+  	</script>
+
+	<script type="text/javascript">
+
+		function repeatHelp() 
+		{
+
+			var repeats = $('body').find('[piloti-repeat]');
+
+			$(repeats).each(function(key,value){
+
+				if( $(this).attr('random') != undefined ){
+					var inner_els = $(this).find('[pi-el]');
+					$(inner_els).each(function(key_el, value_el){
+						var el_length = $(this).text().length;
+						
+					});
+				}
+
+				var count = $(this).attr('piloti-repeat');
+				var $el = $(this);
+				for(i = 0; i < count; i++) {
+					$el.clone().appendTo($el.parent());
+				}
+			});
+		}
+
+		function stringGenerate(length)
+		{
+		    var text = "";
+		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		    for( var i=0; i < length; i++ )
+		        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+		    return text;
+		}
+
+		repeatHelp();
+
+	</script>
+</body>
+</html>

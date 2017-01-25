@@ -57,7 +57,7 @@ $tabelas = getTabelas();
                         @endforeach
                         </p>
                             <div class="list-group-controls">
-                                 <button class="btn btn-danger btn-rounded btn-trash-tabela" tabela-id="{{$tabela->id}}"><span class="fa fa-trash"></span></button>
+                                 <button class="btn btn-danger btn-rounded btn-sm btn-trash-tabela" tabela-id="{{$tabela->id}}"><span class="fa fa-trash"></span></button>
                             </div>                                       
                     </a>
 
